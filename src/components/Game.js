@@ -19,7 +19,7 @@ class Game extends React.Component {
         console.log("browserWidth", this._area.current.clientWidth);
         console.log("browserHeight", this._area.current.clientHeight);
         let maxX = this._area.current.clientWidth * 0.9;
-        let maxY = this._area.current.clientHeight * 0.9;
+        let maxY = this._area.current.clientHeight * 0.85;
         this.state.score++;
         this.setState({
             ...this.state, posX: Math.floor(Math.random() * maxX),
@@ -40,7 +40,7 @@ class Game extends React.Component {
             color: "white",
             position: "absolute",
             left: this.state.posX + "px",
-            top: this.state.posY + "px"
+            bottom: this.state.posY + "px"
         }
     };
 
