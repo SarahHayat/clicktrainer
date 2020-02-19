@@ -1,24 +1,31 @@
 import React from "react";
+import {connect} from "react-redux";
+import {addClick} from "../store/action";
 
-export default class Game extends React.Component{
+class Game extends React.Component {
+
+    _area = React.createRef();
 
     constructor(props) {
         super(props);
         this.state = {
-         posX: 100,
-         posY: 100
+            posX: 100,
+            posY: 100,
+            score: 0
         }
-
     }
 
     _click = () => {
-        console.log("browserWidth", window.outerWidth)
-        console.log("browserHeight", window.outerHeight)
-
-        let maxX = window.outerWidth * 0.9;
-        let maxY = window.outerHeight * 0.9;
-
-        this.setState({...this.state, posX: Math.floor(Math.random() * maxX), posY: Math.floor(Math.random() * maxY)});
+        console.log("browserWidth", this._area.current.clientWidth);
+        console.log("browserHeight", this._area.current.clientHeight);
+        let maxX = this._area.current.clientWidth * 0.9;
+        let maxY = this._area.current.clientHeight * 0.9;
+        this.state.score++;
+        this.setState({
+            ...this.state, posX: Math.floor(Math.random() * maxX),
+            posY: Math.floor(Math.random() * maxY), score: this.state.score
+        });
+        this.props.addClick(this.state.score);
         console.log(this.state.posX);
         console.log(this.state.posY);
     };
@@ -39,36 +46,48 @@ export default class Game extends React.Component{
 
     _screenSize = () => {
         return {
-            width: window.innerWidth,
-            height: window.innerHeight
+            width: this._area.current.clientWidth,
+            height: this._area.current.clientHeight
         }
     }
 
     render() {
         return (
             <div>
-
-
-                <div className="area">
+                <div className="area" ref={this._area}>
+                    <p> Score {this.state.score}</p>
                     <ul className="circles">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
+                        <li/>
                     </ul>
                 </div>
-                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click}></button>
-
+                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click}/>
             </div>
         );
     }
+}
 
-
+const mapStateToProps = (state) => {
+    return {
+        score : state.score
     }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addClick: click => {
+            dispatch(addClick(click))
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
 

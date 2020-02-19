@@ -1,13 +1,16 @@
 import React from "react";
+import {connect} from "react-redux";
+import {addScore} from "../store/action";
 
-export default class Chrono extends React.Component {
+class Chrono extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             minutes: 1,
-            seconds: 0
-        }
+            seconds: 0,
+            finish: false
+        };
         this._startChrono()
     }
 
@@ -15,7 +18,7 @@ export default class Chrono extends React.Component {
     _startChrono = () => {
 
         this.myInterval = setInterval(() => {
-            const {seconds, minutes} = this.state
+            const {seconds, minutes} = this.state;
             if (seconds > 0) {
                 this.setState(({seconds}) => ({
                     seconds: seconds - 1
@@ -23,6 +26,7 @@ export default class Chrono extends React.Component {
             }
             if (seconds === 0) {
                 if (minutes === 0) {
+                    this.props.addScore(this.props.score);
                     clearInterval(this.myInterval)
                 } else {
                     this.setState(({minutes}) => ({
@@ -30,10 +34,14 @@ export default class Chrono extends React.Component {
                         seconds: 59
                     }))
                 }
+            } else if (seconds === 55 && minutes === 0) {
+                console.log(this.props.click);
+                this.props.addScore(this.props.click);
+                clearInterval(this.myInterval)
             }
         }, 1000)
 
-    }
+    };
 
 
     componentWillUnmount() {
@@ -53,3 +61,19 @@ export default class Chrono extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        click : state.click
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addScore: score => {
+            dispatch(addScore(score))
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chrono)
