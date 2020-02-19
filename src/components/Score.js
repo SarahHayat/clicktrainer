@@ -13,7 +13,7 @@ export default class Score extends React.Component {
             <table>
             <thead><tr><th>Score</th></tr></thead><tbody>
                     {
-                       this.props.score.map((index) => <tr key={index}><td>{this.score}</td></tr>)
+                       this.props.score.map((value, index) => <tr key={index}><td>{value.score}</td></tr>)
                     }
         </tbody>
         </table>
@@ -29,4 +29,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-//export default withRouter(connect(mapStateToProps))(Score);
+export default withRouter(connect(mapStateToProps))(Score);
