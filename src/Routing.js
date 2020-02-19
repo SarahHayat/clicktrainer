@@ -3,6 +3,8 @@ import React from "react";
 import "./App.css"
 import Game from "./components/Game";
 import Chrono from "./components/Chrono";
+import Score from "./components/Score";
+
 
 
 export default class Routing extends React.Component {
@@ -25,7 +27,9 @@ export default class Routing extends React.Component {
                             <li>
                                 <Link to="/">Game</Link>
                             </li>
-
+                            <li>
+                                <Link to="/Score">Score</Link>
+                            </li>
                         </ul>
                     </nav>
                     {/* A <Switch> looks through its children <Route>s and
@@ -33,9 +37,12 @@ export default class Routing extends React.Component {
                     <Switch>
                         <Route exact path="/">
                             <Chrono/>
+                            <Score/>
                             <Game/>
                         </Route>
-
+                        <Route path="/Score">
+                            <Score/>
+                        </Route>
                     </Switch>
                 </div>
             </Router>

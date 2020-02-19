@@ -6,7 +6,8 @@ export default class Game extends React.Component{
         super(props);
         this.state = {
          posX: 100,
-         posY: 100
+         posY: 100,
+         score: 0
         }
 
     }
@@ -15,8 +16,10 @@ export default class Game extends React.Component{
         this.setState({...this.state, posX: Math.floor(Math.random() * 1000), posY: Math.floor(Math.random() * 1000)});
         console.log(this.state.posX);
         console.log(this.state.posY);
+        this.score++;
     };
 
+    //quand la partie est finie, envoyer le score dans le store pour qu'il l'ajoute à la liste des scores 
     _buttonStyle = () => {
 
         return {
@@ -36,6 +39,7 @@ export default class Game extends React.Component{
         return(
             <div className="gameScreen">
                 <button style={this._buttonStyle()} onClick={this._click}>Click</button>
+                <p> Score {this.score}</p>
             </div>
         );
     }
