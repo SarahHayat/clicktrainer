@@ -1,19 +1,39 @@
 .App {
+  cursor: crosshair;
+
   text-align: center;
 }
 
 .App-logo {
+  cursor: crosshair;
+
   height: 40vmin;
   pointer-events: none;
+}
+body{
+  cursor: crosshair;
+}
+img{
+  cursor: crosshair;
+}
+a:link{
+  cursor: crosshair;
+}
+button{
+  cursor: crosshair;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+    cursor: crosshair;
+
   }
 }
 
 .App-header {
+  cursor: crosshair;
+
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -25,14 +45,20 @@
 }
 
 .App-link {
+  cursor: crosshair;
+
   color: #61dafb;
 }
 
 @keyframes App-logo-spin {
   from {
+    cursor: crosshair;
+
     transform: rotate(0deg);
   }
   to {
+    cursor: crosshair;
+
     transform: rotate(360deg);
   }
 }
