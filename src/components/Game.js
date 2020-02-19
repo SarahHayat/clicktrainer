@@ -2,6 +2,10 @@ import React from "react";
 
 export default class Game extends React.Component{
 
+
+
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -10,6 +14,7 @@ export default class Game extends React.Component{
         }
 
     }
+
 
     _click = () => {
         this.setState({...this.state, posX: Math.floor(Math.random() * 1000), posY: Math.floor(Math.random() * 1000)});
@@ -31,13 +36,9 @@ export default class Game extends React.Component{
         }
     };
 
-
     render() {
         return(
             <div >
-
-
-
                 <div className="area">
                     <ul className="circles">
                         <li> </li>
@@ -60,6 +61,7 @@ export default class Game extends React.Component{
 
         );
     }
+
 
 
     }
