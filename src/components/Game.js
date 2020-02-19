@@ -23,8 +23,8 @@ export default class Game extends React.Component{
             borderRadius: 50 + "%",
             height: 40 + "px",
             width: 40 + "px",
-            background: "red",
-            color: "white",
+            /*background: "red",
+            color: "white",*/
             position: "absolute",
             left: this.state.posX + "px",
             top: this.state.posY + "px"
@@ -34,9 +34,30 @@ export default class Game extends React.Component{
 
     render() {
         return(
-            <div className="gameScreen">
-                <button style={this._buttonStyle()} onClick={this._click}>Click</button>
+            <div >
+
+
+
+                <div className="area">
+                    <ul className="circles">
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
+                    </ul>
+                </div>
+                <button className="gameScreen" style={this._buttonStyle()} onClick={this._click}> </button>
+
             </div>
+
+
+
         );
     }
 
