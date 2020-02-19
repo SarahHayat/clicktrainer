@@ -54,14 +54,12 @@
 
 
 
-.area{
+/*.area{
   background: #4e54c8;
   background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
   width: 100%;
   height:100vh;
-
-
-}
+}*/
 
 .circles{
   position: absolute;
@@ -165,34 +163,40 @@
 @keyframes animate {
 
   0%{
+    box-shadow:
+            inset 0 0 50px #fff,
+            inset 20px 0 80px #f0f,
+            inset -20px 0 80px #0ff,
+            inset 20px 0 300px #f0f,
+            inset -20px 0 300px #0ff,
+            0 0 50px #fff,
+            -10px 0 80px #f0f,
+            10px 0 80px #0ff;
     transform: translateY(0) rotate(0deg);
     opacity: 1;
     border-radius: 0;
   }
 
   100%{
+    box-shadow:
+            inset 0 0 50px #fff,
+            inset 20px 0 80px #f0f,
+            inset -20px 0 80px #0ff,
+            inset 20px 0 300px #f0f,
+            inset -20px 0 300px #0ff,
+            0 0 50px #fff,
+            -10px 0 80px #f0f,
+            10px 0 80px #0ff;
     transform: translateY(-1000px) rotate(720deg);
-    opacity: 0;
-    border-radius: 50%;
+    opacity: 0.3;
+    border-radius: 70%;
   }
 
 }
 
-
-
-#Game{
-  display: inline-block;
+h1 span {
   color: white;
-  font-size: 50px;
-  cursor: wait;
 }
-
-
-
-
-
-
-
 
 .App {
   cursor: crosshair;
@@ -219,10 +223,10 @@ button:before{
   cursor: crosshair;
 
 }button{
-  cursor: crosshair;
-  size: 20px;
+   cursor: crosshair;
+   size: 20px;
 
-}
+ }
 
 
 
@@ -250,13 +254,120 @@ button:before{
     background: radial-gradient(circle at center, #946afb 99%, #fff 100%, #fff 100%);
   }
 }
+.area{
+  background: #4e54c8;
+  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+  width: 100%;
+  height:100vh;
+
+
+}
 
 body {
-  background: radial-gradient(circle at center, rgba(0, 4, 255, 0.44) , rgba(52, 0, 131, 0.63) , rgba(156, 0, 146, 0.63) );
+  background: #680086;
+  overflow: hidden;
 }
-p{
-  color: white;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*neon*/
+p {
+  text-align: center;
+  font-size: 7em;
+  margin: 20px 0 20px 0;
 }
+
+a {
+  text-decoration: none;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+p:nth-child(1) a {
+  color: #fff;
+  font-family: Monoton;
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: neon1 1.5s ease-in-out infinite alternate;
+}
+
+p:nth-child(1) a:hover {
+  color: #FF1177;
+  -webkit-animation: none;
+  -moz-animation: none;
+  animation: none;
+}
+
+p:nth-child(2) a {
+  font-size: 1.5em;
+  color: #228DFF;
+  font-family: Iceland;
+}
+
+p:nth-child(2) a:hover {
+  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon2 1.5s ease-in-out infinite alternate;
+  animation: neon2 1.5s ease-in-out infinite alternate;
+}
+p:nth-child(3) a {
+  color: #FFDD1B;
+  font-family: Pacifico;
+}  p:nth-child(3) a:hover {
+     -webkit-animation: neon3 1.5s ease-in-out infinite alternate;
+     -moz-animation: neon3 1.5s ease-in-out infinite alternate;
+     animation: neon3 1.5s ease-in-out infinite alternate;
+   }  p:nth-child(4) a {
+        color: #B6FF00;
+        font-family: "Press Start 2P";
+        font-size: 0.8em;
+      }  p:nth-child(4) a:hover {
+           -webkit-animation: neon4 1.5s ease-in-out infinite alternate;
+           -moz-animation: neon4 1.5s ease-in-out infinite alternate;
+           animation: neon4 1.5s ease-in-out infinite alternate;
+         }  p:nth-child(5) a {
+              color: #FF9900;
+              font-family: Audiowide;
+            }  p:nth-child(5) a:hover {
+                 -webkit-animation: neon5 1.5s ease-in-out infinite alternate;
+                 -moz-animation: neon5 1.5s ease-in-out infinite alternate;
+                 animation: neon5 1.5s ease-in-out infinite alternate;
+               }  p:nth-child(6) a {
+                    color: #BA01FF;
+                    font-family: Vampiro One;
+                  }  p:nth-child(6) a:hover {
+                       -webkit-animation: neon6 1.5s ease-in-out infinite alternate;
+                       -moz-animation: neon6 1.5s ease-in-out infinite alternate;
+                       animation: neon6 1.5s ease-in-out infinite alternate;
+                     }  p a:hover {
+                          color: #ffffff;
+                        }
+/*glow for webkit*/
+
+@-webkit-keyframes neon3 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FFDD1B, 0 0 70px #FFDD1B, 0 0 80px #FFDD1B, 0 0 100px #FFDD1B, 0 0 150px #FFDD1B;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FFDD1B, 0 0 35px #FFDD1B, 0 0 40px #FFDD1B, 0 0 50px #FFDD1B, 0 0 75px #FFDD1B;
+  }
+}
+
+
+
 button {
 
   background: url(asset/target_bg.png) no-repeat center center ;
@@ -266,8 +377,6 @@ button {
   background-size: cover;
 
 
-  margin-left: calc( 50vw - 175px );
-  margin-top: calc( 50vh - 30px );
   width: 350px;
   height: 60px;
   border: none;

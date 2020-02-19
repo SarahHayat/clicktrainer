@@ -47,7 +47,7 @@ export default class Chrono extends React.Component {
             <div>
                 {minutes === 0 && seconds === 0
                     ? <h1>GAME OVER !</h1>
-                    : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
+                    : <h1>Time Remaining: <span>{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</span></h1>
                 }
             </div>
         );
