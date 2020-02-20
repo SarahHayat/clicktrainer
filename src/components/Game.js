@@ -47,6 +47,10 @@ class Game extends React.Component {
         }
     };
 
+    submitHandler(e) {
+        e.preventDefault();
+    }
+
     render() {
         return (
             <div>
@@ -66,7 +70,7 @@ class Game extends React.Component {
                         <li/>
                     </ul>
                 </div>
-                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click}/>
+                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click} onKeyPress={this.submitHandler} disabled={this.props.finish} id="cible"/>
             </div>
         );
     }
@@ -74,7 +78,8 @@ class Game extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        click : state.click
+        click : state.click,
+        finish: state.finish
     }
 };
 

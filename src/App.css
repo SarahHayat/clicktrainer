@@ -211,7 +211,10 @@ button:before{
 
  }
 
-
+.bRestart{
+  color: white;
+  background-color: grey;
+}
 
 @keyframes gradient {
 
@@ -251,22 +254,7 @@ body {
   overflow: hidden;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-button {
+#cible {
 
   background: url(asset/target_bg.png) no-repeat center center ;
   -webkit-background-size: cover;
@@ -286,7 +274,7 @@ button {
   box-shadow: 0 6px 6px rgba(255, 0, 0, 0.51);
   outline: none;
 }
-button:active {
+#cible:active {
   /* set time duration to your needs */
   animation: gradient 100ms;
   background: #946afb;
