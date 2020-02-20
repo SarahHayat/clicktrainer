@@ -31,6 +31,7 @@ class Game extends React.Component {
         console.log(this.state.posY);
     };
 
+
     _buttonStyle = () => {
 
         return {
@@ -48,6 +49,10 @@ class Game extends React.Component {
             width: this._area.current.clientWidth,
             height: this._area.current.clientHeight
         }
+    };
+
+    submitHandler(e) {
+        e.preventDefault();
     }
 
     render() {
@@ -69,7 +74,7 @@ class Game extends React.Component {
                         <li/>
                     </ul>
                 </div>
-                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click}/>
+                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click} onKeyPress={this.submitHandler}/>
             </div>
         );
     }
