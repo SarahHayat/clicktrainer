@@ -36,8 +36,6 @@ class Game extends React.Component {
             borderRadius: 50 + "%",
             height: 40 + "px",
             width: 40 + "px",
-            background: "red",
-            color: "white",
             position: "absolute",
             left: this.state.posX + "px",
             bottom: this.state.posY + "px"
