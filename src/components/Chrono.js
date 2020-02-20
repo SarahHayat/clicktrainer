@@ -34,7 +34,7 @@ class Chrono extends React.Component {
                         seconds: 59
                     }))
                 }
-            } else if (seconds === 55 && minutes === 0) {
+            } else if (seconds === 30 && minutes === 0) {
                 console.log(this.props.click);
                 this.props.addScore(this.props.click);
                 clearInterval(this.myInterval)

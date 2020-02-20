@@ -267,7 +267,7 @@ body {
 
 
 
-button {
+#button {
 
   background: url(asset/target_bg.png) no-repeat center center ;
   -webkit-background-size: cover;
@@ -285,6 +285,34 @@ button {
   font-size: 1.1em;
   color: #666;
   box-shadow: 0 6px 6px rgba(255, 0, 0, 0.51);
+  outline: none;
+}
+button:active {
+  /* set time duration to your needs */
+  animation: gradient 100ms;
+  background: #946afb;
+  color: #fff;
+  box-shadow: none;
+}
+
+#fakeButton {
+
+  background: url(asset/target_bg.png) no-repeat center center ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+
+  width: 350px;
+  height: 60px;
+  border: none;
+  border-radius: 5px;
+
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #666;
+  /*box-shadow: 0 6px 6px rgba(31, 70, 199, 0.582);*/
   outline: none;
 }
 button:active {
