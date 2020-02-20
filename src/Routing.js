@@ -5,6 +5,7 @@ import Game from "./components/Game";
 import Survivor from "./components/Survivor";
 import Score from "./components/Score";
 import Users from "./components/Users";
+import About from "./components/About";
 
 
 class Routing extends React.Component {
@@ -32,7 +33,9 @@ class Routing extends React.Component {
                             </li>
                             <li>
                                 <Link to="/Users">Users</Link>
-                            </li>
+                            </li><li>
+                            <Link to="/About">About</Link>
+                        </li>
                         </ul>
                     </nav>
                     <Switch>
@@ -47,6 +50,8 @@ class Routing extends React.Component {
                         </Route>
                         <Route path="/Users">
                             <Users/>
+                        </Route><Route path="/About">
+                            <About/>
                         </Route>
                     </Switch>
                 </div>
