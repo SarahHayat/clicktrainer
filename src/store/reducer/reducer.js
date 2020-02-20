@@ -1,32 +1,39 @@
 const initialState = {
     click: 0,
-    score: []
+    score: [],
+    survivorScore: []
 };
 
-function reducer(state = initialState, action){
+function reducer(state = initialState, action) {
 
-    switch (action.type){
+    switch (action.type) {
         case "ADD_CLICK":
-            return {...state, click:  action.click};
+            return {...state, click: action.click};
 
         case "ADD_SCORE":
             return {...state, score: [...state.score, action.score]};
 
+        case "ADD_SURVIVOR_SCORE":
+            console.log({...state, survivorScore: [...state.survivorScore, action.survivorScore]});
+            return {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
+
         case "SET_USER":
-            return {...state, user:  action.user};
+            return {...state, user: action.user};
 
         case "GET_CHRONO":
-            return {...state, chrono:  action.chrono};
+            return {...state, chrono: action.chrono};
 
         case "SET_CHRONO":
-            return {...state, chrono:  action.chrono};
+            return {...state, chrono: action.chrono};
 
         case "GET_CLICK":
-            console.log({...state, isClick:  action.isClick})
-            return {...state, isClick:  action.isClick};
-            
-            default:
-                return state;
+            return {...state, isClick: action.isClick};
+
+        case "GET_GAME_MODE":
+            return {...state, gameMode: action.gameMode};
+
+        default:
+            return state;
     }
 }
 
