@@ -22,8 +22,9 @@ class Game extends React.Component {
         };
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
-        getStoreScore(PATH_NORMAL).map(el => {this.props.addScore(el)})
-        getStoreScore(PATH_SURVIVAL).map(el => {this.props.addSurvivorScore(el)})
+        getStoreScore(PATH_NORMAL).map(el => {this.props.addScore(el)});
+        getStoreScore(PATH_SURVIVAL).map(el => {this.props.addSurvivorScore(el)});
+        this.props.addClick(0);
     }
 
     _reset = () => {
@@ -112,11 +113,11 @@ class Game extends React.Component {
                 }))
             }
             if (millisecondsSurvivor === 99) {
-                    this.setState(({ secondsSurvivor }) => ({
-                        secondsSurvivor: secondsSurvivor + 1,
-                        millisecondsSurvivor: 0
-                    }))
-                }
+                this.setState(({ secondsSurvivor }) => ({
+                    secondsSurvivor: secondsSurvivor + 1,
+                    millisecondsSurvivor: 0
+                }))
+            }
             if (secondsSurvivor === 59) {
                 this.setState(({ minutesSurvivor }) => ({
                     minutesSurvivor: minutesSurvivor + 1,
@@ -209,3 +210,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)
+

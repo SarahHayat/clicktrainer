@@ -1,9 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import {addClick, getGameMode} from "../store/action";
-import Chrono from "./Game";
 import {GAME_MODE_NORMAL} from "../gameMode";
-import {getStoreScore, PATH_NORMAL, PATH_SURVIVAL} from "../firebase/dataShare";
+import Game from "./Game";
 
 class Normal extends React.Component {
 
@@ -94,6 +93,7 @@ class Normal extends React.Component {
             position: "absolute",
             left: this.state.fakePosX + "px",
             bottom: this.state.fakePosY + "px"
+
         }
     };
 
@@ -111,7 +111,7 @@ class Normal extends React.Component {
     render() {
         return (
             <div>
-                <Chrono/>
+                <Game/>
                 <div className="area" ref={this._area}>
                     <p> Score {this.props.click}</p>
                     <ul className="circles">

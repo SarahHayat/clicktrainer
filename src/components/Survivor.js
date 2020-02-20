@@ -32,7 +32,7 @@ class Survivor extends React.Component {
         this.props.addClick(this.state.click);
         this.state.isCLick = true;
         this.props.getClick(this.state.isCLick);
-        this.props.setChrono(50);
+        this.props.setChrono(30);
 
 
     };
