@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import {addClick, addScore, addSurvivorScore, setChrono} from "../store/action";
-import Survivor from "./Survivor";
 import {GAME_MODE_NORMAL, GAME_MODE_SURVIVOR} from "../gameMode";
 
 class Chrono extends React.Component {
@@ -21,7 +20,7 @@ class Chrono extends React.Component {
 
 
     _startChrono = () => {
-        this.myInterval = setInterval(() => {
+        this.chrono = setInterval(() => {
                 const {milliseconds, seconds, minutes} = this.state;
                 if (this.props.chrono !== undefined) {
                     this.setState(({milliseconds}) => ({milliseconds: milliseconds + this.props.chrono}));
@@ -48,10 +47,57 @@ class Chrono extends React.Component {
                         milliseconds: 1000
                     }))
                 }
+
                 if (milliseconds === 0) {
                     if (seconds === 0) {
                         if (minutes === 0) {
-                            clearInterval(this.myInterval)
+                            clearInterval(this.chrono)
+                        } else {
+                            this.setState(({minutes}) => ({
+                                minutes: minutes - 1,
+                                seconds: 59,
+                                milliseconds: 1000
+                            }))
+                        }
+                    }
+                } else if (seconds === 0 && minutes === 0) {
+                    this._saveScore();
+                    this.setState({
+                        milliseconds: 0,
+                        seconds: 0
+                    });
+                    this.props.addScore(this.props.click);
+                    console.log("log");
+                    clearInterval(this.chrono);
+                    this.props.addClick(0);
+
+                }
+            }
+            ,
+            10
+        )
+    };
+
+    _chronoSurvivor = () => {
+        this.chronoSurvivor = setInterval(() => {
+                const {milliseconds, seconds, minutes} = this.state;
+
+                if (milliseconds > 0) {
+                    this.setState(({milliseconds}) => ({
+                        milliseconds: milliseconds + 1
+                    }))
+                }
+
+                if (milliseconds === 99) {
+                    this.setState(({seconds}) => ({
+                        seconds: seconds + 1,
+                        milliseconds: 0
+                    }))
+                }
+                if (milliseconds === 0) {
+                    if (seconds === 0) {
+                        if (minutes === 0) {
+                            clearInterval(this.chronoSurvivor)
                         } else {
                             this.setState(({minutes}) => ({
                                 minutes: minutes - 1,
@@ -61,20 +107,7 @@ class Chrono extends React.Component {
                         }
                     }
                 } else if (seconds === 55 && minutes === 0) {
-                    this._saveScore();
-                    this.setState({
-                        milliseconds: 0,
-                        seconds: 0
-                    });
-                    // this.props.setChrono({
-                    //     milliseconds: this.props.milliseconds
-                    // });
-                    console.log(this.props.click);
-                    this.props.addScore(this.props.click);
-                    console.log("log");
-                    clearInterval(this.myInterval);
-                    this.props.addClick(0);
-
+                    clearInterval(this.chronoSurvivor);
                 }
             }
             ,
@@ -101,7 +134,7 @@ class Chrono extends React.Component {
     };
 
     componentWillUnmount() {
-        clearInterval(this.myInterval)
+        clearInterval(this.chrono)
     }
 
     render() {
