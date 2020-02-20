@@ -312,7 +312,7 @@ button:active {
   font-weight: bold;
   font-size: 1.1em;
   color: #666;
-  /*box-shadow: 0 6px 6px rgba(31, 70, 199, 0.582);*/
+  box-shadow: 0 6px 6px rgba(255, 0, 50, 0.51);
   outline: none;
 }
 button:active {

@@ -15,11 +15,12 @@ class Game extends React.Component {
             fakePosX: 50,
             fakePosY: 50,
             score: 0,
-            fakeClick: true
+            fakeClick: false
         }
     }
 
     _click = () => {
+        this._fakeClick();
         console.log("browserWidth", this._area.current.clientWidth);
         console.log("browserHeight", this._area.current.clientHeight);
         let maxX = this._area.current.clientWidth * 0.9;
@@ -35,11 +36,9 @@ class Game extends React.Component {
             fakePosY: Math.floor(Math.random() * fakeMaxY), 
             score: this.state.score
         });
-        if(this._fakeClick()){
+        if(this.state.fakeClick){
             this.setState({
                 ...this.state, 
-                fakePosX: Math.floor(Math.random() * fakeMaxX),
-                fakePosY: Math.floor(Math.random() * fakeMaxY),
                 posX: Math.floor(Math.random() * maxX),
                 posY: Math.floor(Math.random() * maxY), 
                 score: this.state.score
@@ -54,8 +53,11 @@ class Game extends React.Component {
     };
 
     _fakeClick = () => {
-        return this.state.fakeClick != this.state.fakeClick
-
+        if(this.state.fakeClick){
+            this.state.fakeClick = false
+        }else{
+            this.state.fakeClick = true
+        }
     };
 
     _onFakeClick = () => {
@@ -64,6 +66,7 @@ class Game extends React.Component {
            ...this.state, score: this.state.score 
         })
         this.props.addClick(this.state.score);
+       
     }
 
 
@@ -120,7 +123,7 @@ class Game extends React.Component {
                     </ul>
                 </div>
                 <button id="button" style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click}/>
-                <button id="fakeButton" style={Object.assign(this._fakeButtonStyle(), this._screenSize)} onClick={this._onFakeClick}/> 
+                {this.state.fakeClick ? <button id="fakeButton" style={Object.assign(this._fakeButtonStyle(), this._screenSize)} onClick={this._onFakeClick}/> : null}
             </div>
             
              
