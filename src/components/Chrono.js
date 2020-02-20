@@ -5,6 +5,10 @@ import {GAME_MODE_NORMAL, GAME_MODE_SURVIVOR} from "../gameMode";
 
 class Chrono extends React.Component {
 
+    /**
+     * initialisation of the timer
+     * @param {*} props 
+     */
 
     constructor(props) {
         super(props);
@@ -20,6 +24,10 @@ class Chrono extends React.Component {
         this.props.getFinish(this.state.finish);
     }
 
+
+    /**
+     * the  function reset is allow to reset the timer, the score and the game
+     */
     _reset = () => {
         this.state.start = true;
         clearInterval(this.myInterval);
@@ -29,13 +37,19 @@ class Chrono extends React.Component {
         this.props.addClick(0);
     };
 
+    /**
+     * the function start is allow to start the game and the timer 
+     */
     _start = () => {
         this.state.start = false;
         this.state.finish = false;
         this.props.getFinish(this.state.finish);
         this._startChrono()
     }
-
+/**
+ * the function startChrono is allow to operate the timer, and if the timer = 0, so the score is saved on the score's table
+ * this timer is used only on the game mode  
+ */
     _startChrono = () => {
         this.setState({...this.state, minutes: 1, seconds: 0});
         this.chrono = setInterval(() => {
@@ -93,6 +107,10 @@ class Chrono extends React.Component {
         )
     };
 
+/**
+ * the function startChrono is allow to operate the SurvivorTimer, and if the timer = 0, so the time is saved on the score's table
+ * this timer is used only on the survivor mode
+ */
     _chronoSurvivor = () => {
         this.chronoSurvivor = setInterval(() => {
                 const {milliseconds, seconds, minutes} = this.state;
@@ -129,7 +147,9 @@ class Chrono extends React.Component {
             10
         )
     };
-
+/**
+ * the function saveScore is allow to save the score on the score's table
+ */
     _saveScore = () => {
         if (this.props.gameMode === GAME_MODE_NORMAL) {
             this.props.addScore(
@@ -157,21 +177,23 @@ class Chrono extends React.Component {
 
         return (
             <div>
-                {seconds === 0 && milliseconds === 0
+                {seconds === 0 && milliseconds === 0 
                     ? <h1>Clicker Training</h1>
                     :
-                    <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds}</span>
-                    </h1>
+                    <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds}</span></h1> //timer with seconds and milliseconds
                 }
                 <div>
-                    {this.state.start ? null : <button onClick={this._reset} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>}
+                    {this.state.start ? null : <button onClick={this._reset} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>} 
                     {this.state.start ? <button onClick={this._start} className = "bRestart" onKeyPress={this.submitHandler}>Start</button> : null}
-                </div>
-            </div>
+                </div> 
+            </div> // start button and reset button
         );
     }
 }
-
+/**
+ * read the store
+ * @param {*} state 
+ */
 const mapStateToProps = (state) => {
     return {
         click: state.click,
@@ -180,7 +202,10 @@ const mapStateToProps = (state) => {
         gameMode: state.gameMode
     }
 };
-
+/**
+ * write on the store
+ * @param {*} dispatch 
+ */
 const mapDispatchToProps = dispatch => {
     return {
         getFinish: finish => {
