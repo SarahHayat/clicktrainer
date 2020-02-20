@@ -25,12 +25,13 @@ class Chrono extends React.Component {
         this.setState({...this.state, minutes: 1, seconds: 0, milliseconds:0});
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
+        this.props.addClick(0);
     };
 
     _start = () => {
         this.state.start = false;
+        this.state.finish = false;
         this.props.getFinish(this.state.finish);
-        this.props.addClick(0);
         this._startChrono()
     }
 
@@ -92,7 +93,6 @@ class Chrono extends React.Component {
                     console.log(this.props.click);
                     this.props.addScore(this.props.click);
                     clearInterval(this.myInterval);
-                    this.props.addClick(0);
                     this.state.finish = true;
                     this.props.getFinish(this.state.finish);
                 }
