@@ -9,8 +9,6 @@ class Score extends React.Component {
             score: [],
             survivorScore: [],
         };
-        console.log(this.props.survivorScore)
-
     }
 
     render() {

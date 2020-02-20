@@ -11,10 +11,21 @@ function reducer(state = initialState, action){
             return {...state, click:  action.click};
 
         case "ADD_SCORE":
-            return {...state, score: [...state.score, action.score]};
+            let nextState = {...state, score: [...state.score, action.score]};
+            console.log(nextState);
+            if (nextState.score.length > 5) {
+                nextState.score.pop()
+            }
+            return nextState;
 
         case "ADD_SURVIVOR_SCORE":
-            console.log({...state, survivorScore: [...state.survivorScore, action.survivorScore]});
+            let nextStatesurvivorScore = {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
+            console.log(nextStatesurvivorScore);
+            if (nextStatesurvivorScore.survivorScore.length > 5) {
+                nextStatesurvivorScore.survivorScore.pop()
+            }
+            return nextStatesurvivorScore;
+
             return {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
 
         case "SET_USER":
