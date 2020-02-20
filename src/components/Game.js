@@ -12,23 +12,20 @@ class Game extends React.Component {
         this.state = {
             posX: 100,
             posY: 100,
-            score: 0
+            click: 0,
+
         }
     }
 
     _click = () => {
-        console.log("browserWidth", this._area.current.clientWidth);
-        console.log("browserHeight", this._area.current.clientHeight);
         let maxX = this._area.current.clientWidth * 0.9;
         let maxY = this._area.current.clientHeight * 0.85;
-        this.state.score++;
+        this.state.click++;
         this.setState({
             ...this.state, posX: Math.floor(Math.random() * maxX),
             posY: Math.floor(Math.random() * maxY), score: this.state.score
         });
-        this.props.addClick(this.state.score);
-        console.log(this.state.posX);
-        console.log(this.state.posY);
+        this.props.addClick(this.state.click);
     };
 
     _buttonStyle = () => {
@@ -48,14 +45,14 @@ class Game extends React.Component {
             width: this._area.current.clientWidth,
             height: this._area.current.clientHeight
         }
-    }
+    };
 
     render() {
         return (
             <div>
                 <Chrono/>
                 <div className="area" ref={this._area}>
-                    <p> Score {this.state.score}</p>
+                    <p> Score {this.state.click}</p>
                     <ul className="circles">
                         <li/>
                         <li/>
@@ -77,7 +74,7 @@ class Game extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        score : state.score
+        click : state.click
     }
 };
 

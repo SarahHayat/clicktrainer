@@ -10,8 +10,10 @@ function reducer(state = initialState, action){
             return {...state, click:  action.click};
 
         case "ADD_SCORE":
-            console.log({...state, score: [...state.score, action.score]});
             return {...state, score: [...state.score, action.score]};
+
+        case "SET_USER":
+            return {...state, user:  action.user};
             
             default:
                 return state;
