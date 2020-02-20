@@ -77,7 +77,7 @@ class Chrono extends React.Component {
                             }))
                         }
                     }
-                } else if (seconds === 0 && minutes === 0) {
+                } else if (seconds === 55 && minutes === 0) {
                     this._saveScore();
                     this.setState({
                         milliseconds: 0
@@ -138,6 +138,7 @@ class Chrono extends React.Component {
                     score: this.props.click
                 });
         } else if (this.props.gameMode === GAME_MODE_SURVIVOR) {
+            console.log("yolo")
             this.props.addSurvivorScore(
                 {
                     user: this.state.user,
