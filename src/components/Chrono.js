@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {addClick, addScore, setChrono, getFinish, addSurvivorScore} from "../store/action";
 import {GAME_MODE_NORMAL, GAME_MODE_SURVIVOR} from "../gameMode";
+import {PATH_NORMAL, PATH_SURVIVAL, storeScore} from "../firebase/dataShare";
 
 class Chrono extends React.Component {
 
@@ -16,6 +17,9 @@ class Chrono extends React.Component {
             minutes: 1,
             seconds: 0,
             milliseconds: 0,
+            minutesSurvivor: 0,
+            secondsSurvivor: 0,
+            millisecondsSurvivor: 0,
             finish: false,
             user: this.props.user,
             start: true
@@ -30,7 +34,8 @@ class Chrono extends React.Component {
      */
     _reset = () => {
         this.state.start = true;
-        clearInterval(this.myInterval);
+        clearInterval(this.chrono);
+        clearInterval(this.chronoSurvivor);
         this.setState({...this.state, minutes: 1, seconds: 0, milliseconds:0});
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
@@ -44,7 +49,10 @@ class Chrono extends React.Component {
         this.state.start = false;
         this.state.finish = false;
         this.props.getFinish(this.state.finish);
-        this._startChrono()
+        this._startChrono();
+        if (this.props.gameMode === GAME_MODE_SURVIVOR) {
+            this._chronoSurvivor();
+        }
     }
 /**
  * the function startChrono allows to operate the timer, and if the timer = 0, so the score is saved on the score's table
@@ -96,7 +104,6 @@ class Chrono extends React.Component {
                     this.setState({
                         milliseconds: 0
                     });
-                    this.props.addScore(this.props.click);
                     clearInterval(this.chrono);
                     this.state.finish = true;
                     this.props.getFinish(this.state.finish);
@@ -112,61 +119,55 @@ class Chrono extends React.Component {
  * this timer is used only on the survivor mode
  */
     _chronoSurvivor = () => {
+        this.setState({...this.state, minutesSurvivor: 0, secondsSurvivor: 0, millisecondsSurvivor: 0});
         this.chronoSurvivor = setInterval(() => {
-                const {milliseconds, seconds, minutes} = this.state;
-
-                if (milliseconds > 0) {
-                    this.setState(({milliseconds}) => ({
-                        milliseconds: milliseconds + 1
-                    }))
-                }
-
-                if (milliseconds === 99) {
-                    this.setState(({seconds}) => ({
-                        seconds: seconds + 1,
-                        milliseconds: 0
-                    }))
-                }
-                if (milliseconds === 0) {
-                    if (seconds === 0) {
-                        if (minutes === 0) {
-                            clearInterval(this.chronoSurvivor)
-                        } else {
-                            this.setState(({minutes}) => ({
-                                minutes: minutes - 1,
-                                seconds: 59,
-                                milliseconds: 1000
-                            }))
-                        }
-                    }
-                } else if (seconds === 55 && minutes === 0) {
-                    clearInterval(this.chronoSurvivor);
-                }
+            const { secondsSurvivor, minutesSurvivor, millisecondsSurvivor } = this.state;
+            if (millisecondsSurvivor >= 0) {
+                this.setState(({ millisecondsSurvivor }) => ({
+                    millisecondsSurvivor: millisecondsSurvivor + 1
+                }))
             }
-            ,
-            10
-        )
+            if (millisecondsSurvivor === 99) {
+                    this.setState(({ secondsSurvivor }) => ({
+                        secondsSurvivor: secondsSurvivor + 1,
+                        millisecondsSurvivor: 0
+                    }))
+                }
+            if (secondsSurvivor === 59) {
+                this.setState(({ minutesSurvivor }) => ({
+                    minutesSurvivor: minutesSurvivor + 1,
+                    secondsSurvivor: 0
+                }))
+            }
+            if (this.state.finish){
+                clearInterval(this.chronoSurvivor);
+            }
+        }, 10)
     };
 /**
  * the function saveScore allows to save the score on the score's table
  */
     _saveScore = () => {
         if (this.props.gameMode === GAME_MODE_NORMAL) {
-            this.props.addScore(
-                {
-                    user: this.state.user,
-                    score: this.props.click
-                });
+            let score = {
+                user: this.state.user,
+                score: this.props.click
+            }
+            this.props.addScore(score);
+            //storeScore(score, PATH_NORMAL);
+            console.log("yo")
         } else if (this.props.gameMode === GAME_MODE_SURVIVOR) {
-            console.log("yolo")
-            this.props.addSurvivorScore(
-                {
-                    user: this.state.user,
-                    score: this.props.click,
-                    chrono: this.state.minutes + ":" + this.state.seconds + ":" + this.state.milliseconds
-                });
+            let score = {
+                user: this.state.user,
+                score: this.props.click,
+                chrono: (this.state.minutesSurvivor < 10 ? `0${this.state.minutesSurvivor}` : this.state.minutesSurvivor) + ":" +
+                    (this.state.secondsSurvivor < 10 ? `0${this.state.secondsSurvivor}` : this.state.secondsSurvivor) + ":" +
+                    (this.state.millisecondsSurvivor < 10 ? `0${this.state.millisecondsSurvivor}` : this.state.millisecondsSurvivor)
+            };
+            this.props.addSurvivorScore(score);
+            //storeScore(score, PATH_SURVIVAL);
+            console.log("plait")
         }
-        ;
     };
 
     componentWillUnmount() {

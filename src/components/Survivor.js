@@ -24,9 +24,10 @@ class Survivor extends React.Component {
         let maxX = this._area.current.clientWidth * 0.9;
         let maxY = this._area.current.clientHeight * 0.85;
         this.state.click++;
+        this.props.addClick(this.state.click)
         this.setState({
             ...this.state, posX: Math.floor(Math.random() * maxX),
-            posY: Math.floor(Math.random() * maxY), score: this.state.score
+            posY: Math.floor(Math.random() * maxY), click: this.state.click
         });
         this.props.addClick(this.state.click);
         this.state.isCLick = true;
@@ -60,7 +61,7 @@ class Survivor extends React.Component {
             <div>
                 <Chrono/>
                 <div className="area" ref={this._area}>
-                    <p> Score {this.state.score}</p>
+                    <p> Score {this.props.click}</p>
                     <ul className="circles">
                         <li/>
                         <li/>
@@ -82,7 +83,7 @@ class Survivor extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        score : state.score,
+        click : state.click,
         chrono: state.chrono
     }
 };
