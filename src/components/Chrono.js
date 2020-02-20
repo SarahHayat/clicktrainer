@@ -160,7 +160,7 @@ class Chrono extends React.Component {
                 {seconds === 0 && milliseconds === 0
                     ? <h1>Clicker Training</h1>
                     :
-                    <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds}</span>
+                    <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds < 10 ? `0${milliseconds}` : milliseconds}</span>
                     </h1>
                 }
                 <div>

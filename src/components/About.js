@@ -7,6 +7,7 @@ export default class About extends React.Component{
     render() {
         return (
             <div>
+                <h3> Team Member </h3>
                 {
                     this.state.nameTab.map(i => <option value={i} key={i} > {i} </option>)
                 }

@@ -51,31 +51,40 @@
   padding: 0px;
 }
 
+footer{
+  color: white;
+  position: absolute;
+  bottom: 0;
+  font-weight: bold;
+}
+
+
 
 
 
 /*mofif post-bug*/
 button.bRestart{
-  transition-duration: 0.7s;
-  background: #4d7bff;
-  display: inline-block;
+
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  -webkit-appearance: none;
+  border: none;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #4285f4;
+  color: #fff;
+  vertical-align: middle;
+  border-radius: 3px;
+  line-height: 36px;
+  min-height: 36px;
+  font-size: 14px;
   text-align: center;
-  color: #36ff1d;
-  font-weight: bold;
-  padding: 1.18em 1.32em 1.03em;
-  line-height: 1;
-  border-radius: 1em;
-  position: relative;
-  min-width: 8.23em;
-  text-decoration: none;
-  font-size: 1.25rem;
-}
-button.bRestart:hover{
-  transition-duration: 0.7s;
-  background: #650087;
-
-  border-radius: 50%;
-
+  text-decoration:none;
+  text-transform: uppercase;
+  min-width: 5.14em;
+  padding:0 1em;
+  margin: 30px auto;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
 }
 
 th{
@@ -102,14 +111,14 @@ label input{
   transition-duration: 2s; /*durée d'animation*/
   display: inline-block;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.98);
-  color: #ffffff;
+  background-color: rgba(250, 252, 255, 0.98);
+  color: #000000;
   text-align: center;
-  font-size: 28px;
-  padding: 20px;
+  padding: 16px;
   width: 200px;
   cursor: pointer;
-  margin: 5px;
+  margin: 2rem;
+  font-size: 20px;
   position: relative;
 }
 input:nth-child(2){
@@ -117,14 +126,14 @@ input:nth-child(2){
   transition-duration: 2s; /*durée d'animation*/
   display: inline-block;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.98);
-  color: #ffffff;
+  background-color: #fafcff;
+  color: #000000;
   text-align: center;
-  font-size: 28px;
-  padding: 20px;
+  font-size: 18px;
+  padding: 11px;
   width: 200px;
   cursor: pointer;
-  margin: 5px;
+  margin: 5rem 1rem 1rem 1rem;
   position: relative;
 }
 
@@ -142,7 +151,15 @@ option{
      text-align: center;
      font-size: 45px;
      color: #ffffff;
-     background: radial-gradient(circle, #24246e, #06051f);
+   }
+
+   h3{
+     list-style: none;
+     text-align: center;
+     font-size: 40px;
+     color: #ffffff;
+     margin-top: 3rem;
+     margin-bottom: 3rem;
    }
 
 
@@ -270,7 +287,7 @@ option{
 }
 h1{
   transition-duration: 1s;
-
+  color: white;
   text-align: center;
 }
 h1 span {
@@ -278,6 +295,7 @@ h1 span {
   color: rgb(111, 0, 136);
 
   text-align: center;
+  font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
 }
 
 th{
@@ -373,11 +391,6 @@ button:before {
 button {
     cursor: crosshair;
     size: 20px;
-}
-
-.bRestart{
-  color: white;
-  background-color: grey;
 }
 
 @keyframes gradient {

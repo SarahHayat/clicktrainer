@@ -113,6 +113,7 @@ class Game extends React.Component {
                 <Chrono/>
                 <div className="area" ref={this._area}>
                     <p> Score {this.props.click}</p>
+                    <footer> © L.E.S.A.H, Inc </footer>
                     <ul className="circles">
                         <li/>
                         <li/>
@@ -129,6 +130,7 @@ class Game extends React.Component {
                 <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click} onKeyPress={this.submitHandler} disabled={this.props.finish} id="cible"/>
                 {this.state.fakeClick ? <button id="fakeButton" style={Object.assign(this._fakeButtonStyle(), this._screenSize)} onClick={this._onFakeClick} onKeyPress={this.submitHandler} disabled={this.props.finish}/> : null}
             </div>
+
         );
     }
 }
