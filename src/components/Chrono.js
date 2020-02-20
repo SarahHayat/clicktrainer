@@ -4,6 +4,7 @@ import {addClick, addScore, setChrono, getFinish} from "../store/action";
 
 class Chrono extends React.Component {
 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,12 +14,23 @@ class Chrono extends React.Component {
             finish: false,
             user: this.props.user,
         };
+        this.state.finish = true;
+        this.props.getFinish(this.state.finish);
     }
 
-    _resetChrono = () => {
+    _reset = () => {
         clearInterval(this.myInterval);
-        this.setState({...this.state, minutes: 1, seconds: 0})
+        this.setState({...this.state, minutes: 1, seconds: 0, milliseconds:0});
+        this.state.finish = true;
+        this.props.getFinish(this.state.finish);
     };
+
+    _start = () => {
+        this.state.finish = false;
+        this.props.getFinish(this.state.finish);
+        this.props.addClick(0);
+        this._startChrono()
+    }
 
     _startChrono = () => {
         this.setState({...this.state, minutes: 1, seconds: 0});
@@ -29,9 +41,9 @@ class Chrono extends React.Component {
                     this.props.setChrono(0)
                 }
 
-                if (milliseconds > 1000) {
+                if (milliseconds > 100) {
                     this.setState(({seconds, milliseconds}) => ({
-                        milliseconds: milliseconds - 1000,
+                        milliseconds: milliseconds - 100,
                         seconds: seconds + 1
 
                     }))
@@ -39,14 +51,14 @@ class Chrono extends React.Component {
 
                 if (milliseconds > 0) {
                     this.setState(({milliseconds}) => ({
-                        milliseconds: milliseconds - 10
+                        milliseconds: milliseconds - 1
                     }))
                 }
 
                 if (milliseconds === 0) {
                     this.setState(({seconds}) => ({
                         seconds: seconds - 1,
-                        milliseconds: 1000
+                        milliseconds: 100
                     }))
                 }
                 if (milliseconds === 0) {
@@ -62,11 +74,11 @@ class Chrono extends React.Component {
                             this.setState(({minutes}) => ({
                                 minutes: minutes - 1,
                                 seconds: 59,
-                                milliseconds: 1000
+                                milliseconds: 100
                             }))
                         }
                     }
-                } else if (seconds === 55 && minutes === 0) {
+                } else if (seconds === 0 && minutes === 0) {
                     this.props.addScore(
                         {
                             user: this.state.user,
@@ -105,8 +117,8 @@ class Chrono extends React.Component {
                     </h1>
                 }
                 <div>
-                    <button onClick={this._resetChrono} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>
-                    <button onClick={this._startChrono} className = "bRestart" onKeyPress={this.submitHandler}>Start</button>
+                    {this.state.finish ? null : <button onClick={this._reset} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>}
+                    {this.state.finish ? <button onClick={this._start} className = "bRestart" onKeyPress={this.submitHandler}>Start</button> : null}
                 </div>
             </div>
         );

@@ -57,7 +57,7 @@ class Survivor extends React.Component {
             <div>
                 <Chrono/>
                 <div className="area" ref={this._area}>
-                    <p> Score {this.state.click}</p>
+                    <p> Score {this.state.score}</p>
                     <ul className="circles">
                         <li/>
                         <li/>
@@ -79,7 +79,7 @@ class Survivor extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        click : state.click,
+        score : state.score,
         chrono: state.chrono
     }
 };
