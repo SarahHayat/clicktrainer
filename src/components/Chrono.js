@@ -47,7 +47,7 @@ class Chrono extends React.Component {
         this._startChrono()
     }
 /**
- * the function startChrono is allow to operate the timer, and if the timer = 0, so the score is saved on the score's table
+ * the function startChrono allows to operate the timer, and if the timer = 0, so the score is saved on the score's table
  * this timer is used only on the game mode  
  */
     _startChrono = () => {
@@ -108,7 +108,7 @@ class Chrono extends React.Component {
     };
 
 /**
- * the function startChrono is allow to operate the SurvivorTimer, and if the timer = 0, so the time is saved on the score's table
+ * the function startChrono allows to operate the SurvivorTimer, and if the timer = 0, so the time is saved on the score's table
  * this timer is used only on the survivor mode
  */
     _chronoSurvivor = () => {
@@ -148,7 +148,7 @@ class Chrono extends React.Component {
         )
     };
 /**
- * the function saveScore is allow to save the score on the score's table
+ * the function saveScore allows to save the score on the score's table
  */
     _saveScore = () => {
         if (this.props.gameMode === GAME_MODE_NORMAL) {
@@ -194,6 +194,7 @@ class Chrono extends React.Component {
  * read the store
  * @param {*} state 
  */
+
 const mapStateToProps = (state) => {
     return {
         click: state.click,
@@ -206,6 +207,7 @@ const mapStateToProps = (state) => {
  * write on the store
  * @param {*} dispatch 
  */
+
 const mapDispatchToProps = dispatch => {
     return {
         getFinish: finish => {

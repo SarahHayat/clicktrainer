@@ -7,7 +7,11 @@ import {GAME_MODE_NORMAL} from "../gameMode";
 class Game extends React.Component {
 
     _area = React.createRef();
-
+    /**
+     * initialisation of the mode "game" with the position of the button, 
+     * the score and the position of the fake button, hide in the beginning.
+     * @param {*} props 
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -21,27 +25,31 @@ class Game extends React.Component {
         this.props.getGameMode(GAME_MODE_NORMAL)
     }
 
+    /**
+     * the function click is activate when we click on one of the buttons.
+     * For the two buttons, when we click, they change position.
+     */
     _click = () => {
         this.state.click = this.props.click;
         this._fakeClick();
-        let maxX = this._area.current.clientWidth * 0.9;
+        let maxX = this._area.current.clientWidth * 0.9; //limitation of the area of the button
         let maxY = this._area.current.clientHeight * 0.85;
-        let fakeMaxX = this._area.current.clientWidth * 0.9;
+        let fakeMaxX = this._area.current.clientWidth * 0.9; //limitation of the area of the fake button
         let fakeMaxY = this._area.current.clientHeight * 0.85;
-        this.state.click++;
+        this.state.click++; //add a point in score
         this.props.addClick(this.state.click)
         this.setState({
             ...this.state,
-            posX: Math.floor(Math.random() * maxX),
+            posX: Math.floor(Math.random() * maxX), //randomize the new position of the button
             posY: Math.floor(Math.random() * maxY),
-            fakePosX: Math.floor(Math.random() * fakeMaxX),
+            fakePosX: Math.floor(Math.random() * fakeMaxX), //randomize the new position of the fake button
             fakePosY: Math.floor(Math.random() * fakeMaxY),
             click: this.state.click
         });
         if(this.state.fakeClick){
             this.setState({
                 ...this.state,
-                posX: Math.floor(Math.random() * maxX),
+                posX: Math.floor(Math.random() * maxX), //randomize the new position of the button
                 posY: Math.floor(Math.random() * maxY),
                 click: this.state.click
             });
@@ -49,11 +57,13 @@ class Game extends React.Component {
         }else{
 
         }
-        this.props.addClick(this.state.click);
-            console.log(this.state.posX);
-            console.log(this.state.posY);
+        this.props.addClick(this.state.click); //add to the score
+            //console.log(this.state.posX);
+            //console.log(this.state.posY);
     };
-
+/**
+ * the function fakeClick allows to appear and disappear the fake button
+ */
     _fakeClick = () => {
         if(this.state.fakeClick){
             this.state.fakeClick = false
@@ -61,7 +71,9 @@ class Game extends React.Component {
             this.state.fakeClick = true
         }
     };
-
+/**
+ * the function fakeClick allows to remove a points when we click on the fake button
+ */
     _onFakeClick = () => {
         this.state.click--;
         this.setState({
@@ -72,7 +84,9 @@ class Game extends React.Component {
     }
 
 
-
+    /**
+     * style of the button
+     */
     _buttonStyle = () => {
 
         return {
@@ -85,6 +99,10 @@ class Game extends React.Component {
         }
     };
 
+     /**
+     * style of the fake button
+     */
+    
     _fakeButtonStyle = () => {
 
         return {
@@ -97,6 +115,9 @@ class Game extends React.Component {
 
         }
     };
+    /**
+     * size of the area game
+     */
 
     _screenSize = () => {
         return {
