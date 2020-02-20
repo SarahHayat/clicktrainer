@@ -113,7 +113,6 @@ class Game extends React.Component {
                 <Chrono/>
                 <div className="area" ref={this._area}>
                     <p> Score {this.props.click}</p>
-                    <footer> © L.E.S.A.H, Inc </footer>
                     <ul className="circles">
                         <li/>
                         <li/>

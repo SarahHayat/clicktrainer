@@ -157,6 +157,7 @@ class Chrono extends React.Component {
 
         return (
             <div>
+                <footer> © L.E.S.A.H, Inc </footer>
                 {seconds === 0 && milliseconds === 0
                     ? <h1>Clicker Training</h1>
                     :

@@ -14,6 +14,7 @@ class Score extends React.Component {
     render() {
         return (
             <div>
+                <footer> © L.E.S.A.H, Inc </footer>
                 <table>
                     <thead>
                     <tr>

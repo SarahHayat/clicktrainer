@@ -16,6 +16,7 @@ class Users extends React.Component{
     render() {
         return (
             <form onSubmit={ event => this.setUser(event) }>
+                <footer> © L.E.S.A.H, Inc </footer>
                 <label>
                     Prénom:
                     <input type="text"  name="Prénom"/>
