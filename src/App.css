@@ -171,7 +171,6 @@
 
   100%{
     transform: translateY(-1000px) rotate(720deg);
-    opacity: 0.3;
     border-radius: 70%;
   }
 
@@ -258,28 +257,30 @@ nav ul li a:hover {
   height: 40vmin;
   pointer-events: none;
 }
-body{             transition-duration: 0.7s;
 
-  cursor: crosshair;
+body {
+    transition-duration: 0.7s;
+    cursor: crosshair;
 }
-img{             transition-duration: 0.7s;
 
-  cursor: crosshair;
+img {
+    transition-duration: 0.7s;
+    cursor: crosshair;
 }
 a:link{             transition-duration: 0.7s;
 
   cursor: crosshair;
 }
-button:before{             transition-duration: 0.7s;
 
-  cursor: crosshair;
+button:before {
+    transition-duration: 0.7s;
+    cursor: crosshair;
+}
 
-}button{
-
-   cursor: crosshair;
-   size: 20px;
-
- }
+button {
+    cursor: crosshair;
+    size: 20px;
+}
 
 .bRestart{
   color: white;
