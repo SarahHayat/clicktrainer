@@ -15,7 +15,10 @@ function reducer(state = initialState, action){
         case "SET_USER":
             return {...state, user:  action.user};
 
-        case "ADD_CHRONO":
+        case "GET_CHRONO":
+            return {...state, chrono:  action.chrono};
+
+        case "SET_CHRONO":
             return {...state, chrono:  action.chrono};
 
         case "GET_CLICK":

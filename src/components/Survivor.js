@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addChrono, addClick, getClick} from "../store/action";
+import {addClick, getClick, setChrono} from "../store/action";
 import Chrono from "./Chrono";
 
 class Survivor extends React.Component {
@@ -13,9 +13,7 @@ class Survivor extends React.Component {
             posX: 100,
             posY: 100,
             click: 0,
-            isClick: false,
-
-
+            isClick: false
         }
     }
 
@@ -30,6 +28,8 @@ class Survivor extends React.Component {
         this.props.addClick(this.state.click);
         this.state.isCLick = true;
         this.props.getClick(this.state.isCLick);
+        this.props.setChrono(500);
+
 
     };
 
@@ -91,6 +91,9 @@ const mapDispatchToProps = dispatch => {
         },
         getClick: isClick => {
             dispatch(getClick(isClick))
+        },
+        setChrono: chrono => {
+            dispatch(setChrono(chrono))
         }
     }
 };
