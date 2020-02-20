@@ -1,7 +1,8 @@
 const initialState = {
     click: 0,
     score: [],
-    survivorScore: []
+    survivorScore: [],
+    user: ""
 };
 
 function reducer(state = initialState, action){

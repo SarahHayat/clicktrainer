@@ -86,13 +86,13 @@ class Chrono extends React.Component {
                         }
                     }
                 } else if (seconds === 55 && minutes === 0) {
-                    this._saveScore();
                     this.setState({
                         milliseconds: 0
                     });
                     clearInterval(this.chrono);
                     this.state.finish = true;
                     this.props.getFinish(this.state.finish);
+                    this._saveScore();
                 }
             }
             ,
@@ -134,6 +134,7 @@ class Chrono extends React.Component {
                 score: this.props.click
             }
             this.props.addScore(score);
+            storeScore(score, PATH_NORMAL);
             console.log("yo")
         } else if (this.props.gameMode === GAME_MODE_SURVIVOR) {
             let score = {
@@ -144,6 +145,7 @@ class Chrono extends React.Component {
                     (this.state.millisecondsSurvivor < 10 ? `0${this.state.millisecondsSurvivor}` : this.state.millisecondsSurvivor)
             };
             this.props.addSurvivorScore(score);
+            storeScore(score, PATH_SURVIVAL);
             console.log("plait")
         }
     };
