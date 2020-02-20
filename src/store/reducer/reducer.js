@@ -32,6 +32,9 @@ function reducer(state = initialState, action){
         case "GET_FINISH":
             return {...state, finish: action.finish};
 
+        case "GET_GAME_MODE":
+            return {...state, gameMode: action.gameMode};
+
             default:
                 return state;
     }
