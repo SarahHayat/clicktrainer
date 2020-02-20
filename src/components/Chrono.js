@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, addScore} from "../store/action";
+import {addChrono, addClick, addScore} from "../store/action";
 
 class Chrono extends React.Component {
 
@@ -18,7 +18,7 @@ class Chrono extends React.Component {
 
 
     _startChrono = () => {
-
+        console.log(this.props.isClick);
         this.myInterval = setInterval(() => {
             const {seconds, minutes} = this.state;
             if (seconds > 0) {
@@ -40,7 +40,7 @@ class Chrono extends React.Component {
                         seconds: 59
                     }))
                 }
-            } else if (seconds === 55 && minutes === 0) {
+            } else if (seconds === 0 && minutes === 0) {
                 this.props.addScore(
                     {
                         user: this.state.user,
@@ -50,6 +50,13 @@ class Chrono extends React.Component {
                 this.props.addScore(this.props.click);
                 clearInterval(this.myInterval);
                 this.props.addClick(0);
+            } else if (this.props.isClick){
+
+                this.setState(({seconds}) => ({
+                    seconds: seconds + 5,
+
+                }))
+                this.props.isClik = false
             }
         }, 1000)
 
@@ -77,7 +84,9 @@ class Chrono extends React.Component {
 const mapStateToProps = (state) => {
     return {
         click: state.click,
-        user: state.user
+        user: state.user,
+        chrono: state.seconds,
+        isClick: state.isClick
     }
 };
 
@@ -89,6 +98,10 @@ const mapDispatchToProps = dispatch => {
 
         addClick: click => {
             dispatch(addClick(click))
+        },
+
+        addChrono: chrono => {
+            dispatch(addChrono(chrono))
         }
     }
 };

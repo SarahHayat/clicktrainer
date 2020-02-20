@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import React from "react";
 import "./App.css"
 import Game from "./components/Game";
-import Chrono from "./components/Chrono";
+import Survivor from "./components/Survivor";
 import Score from "./components/Score";
 import Users from "./components/Users";
 
@@ -25,6 +25,9 @@ class Routing extends React.Component {
                                 <Link to="/">Game</Link>
                             </li>
                             <li>
+                                <Link to="/Survivor">Survivor</Link>
+                            </li>
+                            <li>
                                 <Link to="/Score">Score</Link>
                             </li>
                             <li>
@@ -35,6 +38,9 @@ class Routing extends React.Component {
                     <Switch>
                         <Route exact path="/">
                             <Game/>
+                        </Route>
+                        <Route path="/Survivor">
+                            <Survivor/>
                         </Route>
                         <Route path="/Score">
                             <Score/>

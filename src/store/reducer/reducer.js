@@ -14,6 +14,13 @@ function reducer(state = initialState, action){
 
         case "SET_USER":
             return {...state, user:  action.user};
+
+        case "ADD_CHRONO":
+            return {...state, chrono:  action.chrono};
+
+        case "GET_CLICK":
+            console.log({...state, isClick:  action.isClick})
+            return {...state, isClick:  action.isClick};
             
             default:
                 return state;
