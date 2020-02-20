@@ -383,6 +383,14 @@ html{
   outline: none;
 }
 
+#fakeButton:active {
+  /* set time duration to your needs */
+  animation: gradient 100ms;
+  background: #946afb;
+  color: #fff;
+  box-shadow: none;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
