@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addScore} from "../store/action";
+import {addClick, addScore} from "../store/action";
 
 class Chrono extends React.Component {
 
@@ -9,7 +9,9 @@ class Chrono extends React.Component {
         this.state = {
             minutes: 1,
             seconds: 0,
-            finish: false
+            finish: false,
+            user : this.props.user
+
         };
         this._startChrono()
     }
@@ -26,7 +28,11 @@ class Chrono extends React.Component {
             }
             if (seconds === 0) {
                 if (minutes === 0) {
-                    this.props.addScore(this.props.score);
+                    this.props.addScore(
+                        {
+                            user: this.state.user,
+                            score: this.props.click
+                        });
                     clearInterval(this.myInterval)
                 } else {
                     this.setState(({minutes}) => ({
@@ -35,9 +41,15 @@ class Chrono extends React.Component {
                     }))
                 }
             } else if (seconds === 55 && minutes === 0) {
+                this.props.addScore(
+                    {
+                        user: this.state.user,
+                        score: this.props.click
+                    });
                 console.log(this.props.click);
                 this.props.addScore(this.props.click);
-                clearInterval(this.myInterval)
+                clearInterval(this.myInterval);
+                this.props.addClick(0);
             }
         }, 1000)
 
@@ -64,7 +76,8 @@ class Chrono extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        click : state.click
+        click: state.click,
+        user: state.user
     }
 };
 
@@ -72,6 +85,10 @@ const mapDispatchToProps = dispatch => {
     return {
         addScore: score => {
             dispatch(addScore(score))
+        },
+
+        addClick: click => {
+            dispatch(addClick(click))
         }
     }
 };
