@@ -85,7 +85,7 @@ class Chrono extends React.Component {
                             }))
                         }
                     }
-                } else if (seconds === 55 && minutes === 0) {
+                } else if (seconds === 0 && minutes === 0) {
                     this._saveScore();
                     this.setState({
                         milliseconds: 0
