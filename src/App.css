@@ -54,6 +54,99 @@
 
 
 
+/*mofif post-bug*/
+button.bRestart{
+  transition-duration: 0.7s;
+  background: #4d7bff;
+  display: inline-block;
+  text-align: center;
+  color: #36ff1d;
+  font-weight: bold;
+  padding: 1.18em 1.32em 1.03em;
+  line-height: 1;
+  border-radius: 1em;
+  position: relative;
+  min-width: 8.23em;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+button.bRestart:hover{
+  transition-duration: 0.7s;
+  background: #650087;
+
+  border-radius: 50%;
+
+}
+
+th{
+  margin: 20px;
+  padding: 20px;
+  font-family: "Tahoma", Arial, sans-serif;
+}
+
+label{
+  -webkit-transition-duration: 2s; /*durée d'animation*/
+  transition-duration: 2s; /*durée d'animation*/
+  display: inline-block;
+  border-radius: 10px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  cursor: pointer;
+  margin: 5px;
+  position: relative;
+}
+label input{
+  -webkit-transition-duration: 2s; /*durée d'animation*/
+  transition-duration: 2s; /*durée d'animation*/
+  display: inline-block;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.98);
+  color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  cursor: pointer;
+  margin: 5px;
+  position: relative;
+}
+input:nth-child(2){
+  -webkit-transition-duration: 2s; /*durée d'animation*/
+  transition-duration: 2s; /*durée d'animation*/
+  display: inline-block;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.98);
+  color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  cursor: pointer;
+  margin: 5px;
+  position: relative;
+}
+
+option{
+  -webkit-transition-duration: 0.6s; /*durée d'animation*/
+  transition-duration: 0.6s; /*durée d'animation*/
+  list-style: none;
+  text-align: center;
+  font-size: 40px;
+  color: #ffffff;
+}  option:hover{
+     -webkit-transition-duration: 0.6s; /*durée d'animation*/
+     transition-duration: 0.6s; /*durée d'animation*/
+     list-style: none;
+     text-align: center;
+     font-size: 45px;
+     color: #ffffff;
+     background: radial-gradient(circle, #24246e, #06051f);
+   }
+
+
+
 /*.area{
   background: #4e54c8;
   background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
