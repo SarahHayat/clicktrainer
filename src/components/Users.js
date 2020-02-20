@@ -3,12 +3,22 @@ import {setUser} from "../store/action";
 import {connect} from "react-redux";
 
 class Users extends React.Component{
+    /**
+     * Initialisation of a text input to write an user name
+     * @param {*} props 
+     */
+
     constructor(props) {
         super(props);
         this.state = {
             user : ""
         }
     }
+    /**
+     * 
+     * @param {*} event 
+     */
+    
     setUser(event) {
         event.preventDefault();
         this.props.setUser( event.target[0].value);
