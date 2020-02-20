@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {addClick, getClick, getGameMode, setChrono} from "../store/action";
-import Chrono from "./Chrono";
+import Chrono from "./Game";
 import {GAME_MODE_SURVIVOR} from "../gameMode";
 
 class Survivor extends React.Component {

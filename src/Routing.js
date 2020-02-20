@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import React from "react";
 import "./App.css"
-import Game from "./components/Game";
+import Game from "./components/Normal";
 import Survivor from "./components/Survivor";
 import Score from "./components/Score";
 import Users from "./components/Users";
@@ -22,7 +22,7 @@ class Routing extends React.Component {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Game</Link>
+                                <Link to="/">Normal</Link>
                             </li>
                             <li>
                                 <Link to="/Survivor">Survivor</Link>

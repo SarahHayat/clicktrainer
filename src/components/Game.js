@@ -1,133 +1,176 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, getGameMode} from "../store/action";
-import Chrono from "./Chrono";
-import {GAME_MODE_NORMAL} from "../gameMode";
+import {addClick, addScore, setChrono, getFinish, addSurvivorScore} from "../store/action";
+import {GAME_MODE_NORMAL, GAME_MODE_SURVIVOR} from "../gameMode";
+import {getStoreScore, PATH_NORMAL, PATH_SURVIVAL, setStoreScore} from "../firebase/dataShare";
 
 class Game extends React.Component {
 
-    _area = React.createRef();
 
     constructor(props) {
         super(props);
         this.state = {
-            posX: 100,
-            posY: 100,
-            fakePosX: 50,
-            fakePosY: 50,
-            click: 0,
-            fakeClick: false
+            minutes: 1,
+            seconds: 0,
+            milliseconds: 0,
+            minutesSurvivor: 0,
+            secondsSurvivor: 0,
+            millisecondsSurvivor: 0,
+            finish: false,
+            user: this.props.user,
+            start: true
         };
-        this.props.getGameMode(GAME_MODE_NORMAL)
+        this.state.finish = true;
+        this.props.getFinish(this.state.finish);
+        getStoreScore(PATH_NORMAL).map(el => {this.props.addScore(el)})
+        getStoreScore(PATH_SURVIVAL).map(el => {this.props.addSurvivorScore(el)})
     }
 
-    _click = () => {
-        this.state.click = this.props.click;
-        this._fakeClick();
-        let maxX = this._area.current.clientWidth * 0.9;
-        let maxY = this._area.current.clientHeight * 0.85;
-        let fakeMaxX = this._area.current.clientWidth * 0.9;
-        let fakeMaxY = this._area.current.clientHeight * 0.85;
-        this.state.click++;
-        this.props.addClick(this.state.click)
-        this.setState({
-            ...this.state,
-            posX: Math.floor(Math.random() * maxX),
-            posY: Math.floor(Math.random() * maxY),
-            fakePosX: Math.floor(Math.random() * fakeMaxX),
-            fakePosY: Math.floor(Math.random() * fakeMaxY),
-            click: this.state.click
-        });
-        if(this.state.fakeClick){
-            this.setState({
-                ...this.state,
-                posX: Math.floor(Math.random() * maxX),
-                posY: Math.floor(Math.random() * maxY),
-                click: this.state.click
-            });
-
-        }else{
-
-        }
-        this.props.addClick(this.state.click);
+    _reset = () => {
+        this.state.start = true;
+        clearInterval(this.chrono);
+        clearInterval(this.chronoSurvivor);
+        this.setState({...this.state, minutes: 1, seconds: 0, milliseconds:0});
+        this.state.finish = true;
+        this.props.getFinish(this.state.finish);
+        this.props.addClick(0);
     };
 
-    _fakeClick = () => {
-        if(this.state.fakeClick){
-            this.state.fakeClick = false
-        }else{
-            this.state.fakeClick = true
+    _start = () => {
+        this.state.start = false;
+        this.state.finish = false;
+        this.props.getFinish(this.state.finish);
+        this._startChrono();
+        if (this.props.gameMode === GAME_MODE_SURVIVOR) {
+            this._chronoSurvivor();
         }
-    };
-
-    _onFakeClick = () => {
-        this.state.click--;
-        this.setState({
-           ...this.state, score: this.state.click
-        })
-        this.props.addClick(this.state.click);
-
     }
 
+    _startChrono = () => {
+        this.setState({...this.state, minutes: 1, seconds: 0});
+        this.chrono = setInterval(() => {
+                const {milliseconds, seconds, minutes} = this.state;
+                if (this.props.chrono !== undefined) {
+                    this.setState(({milliseconds}) => ({milliseconds: milliseconds + this.props.chrono}));
+                    this.props.setChrono(0)
+                }
 
+                if (milliseconds > 100) {
+                    this.setState(({seconds, milliseconds}) => ({
+                        milliseconds: milliseconds - 100,
+                        seconds: seconds + 1
 
-    _buttonStyle = () => {
+                    }))
+                }
 
-        return {
-            borderRadius: 50 + "%",
-            height: 40 + "px",
-            width: 40 + "px",
-            position: "absolute",
-            left: this.state.posX + "px",
-            bottom: this.state.posY + "px"
+                if (milliseconds > 0) {
+                    this.setState(({milliseconds}) => ({
+                        milliseconds: milliseconds - 1
+                    }))
+                }
+
+                if (milliseconds === 0) {
+                    this.setState(({seconds}) => ({
+                        seconds: seconds - 1,
+                        milliseconds: 100
+                    }))
+                }
+                if (milliseconds === 0) {
+                    if (seconds === 0) {
+                        if (minutes === 0) {
+                            clearInterval(this.chrono)
+                        } else {
+                            this.setState(({minutes}) => ({
+                                minutes: minutes - 1,
+                                seconds: 59,
+                                milliseconds: 100
+                            }))
+                        }
+                    }
+                } else if (seconds === 55 && minutes === 0) {
+                    this.setState({
+                        milliseconds: 0
+                    });
+                    clearInterval(this.chrono);
+                    this.state.finish = true;
+                    this.props.getFinish(this.state.finish);
+                    this._saveScore();
+                }
+            }
+            ,
+            10
+        )
+    };
+
+    _chronoSurvivor = () => {
+        this.setState({...this.state, minutesSurvivor: 0, secondsSurvivor: 0, millisecondsSurvivor: 0});
+        this.chronoSurvivor = setInterval(() => {
+            const { secondsSurvivor, minutesSurvivor, millisecondsSurvivor } = this.state;
+            if (millisecondsSurvivor >= 0) {
+                this.setState(({ millisecondsSurvivor }) => ({
+                    millisecondsSurvivor: millisecondsSurvivor + 1
+                }))
+            }
+            if (millisecondsSurvivor === 99) {
+                    this.setState(({ secondsSurvivor }) => ({
+                        secondsSurvivor: secondsSurvivor + 1,
+                        millisecondsSurvivor: 0
+                    }))
+                }
+            if (secondsSurvivor === 59) {
+                this.setState(({ minutesSurvivor }) => ({
+                    minutesSurvivor: minutesSurvivor + 1,
+                    secondsSurvivor: 0
+                }))
+            }
+            if (this.state.finish){
+                clearInterval(this.chronoSurvivor);
+            }
+        }, 10)
+    };
+
+    _saveScore = () => {
+        if (this.props.gameMode === GAME_MODE_NORMAL) {
+            let score = {
+                user: this.state.user,
+                score: this.props.click
+            }
+            this.props.addScore(score);
+            setStoreScore([score], PATH_NORMAL);
+            console.log("yo")
+        } else if (this.props.gameMode === GAME_MODE_SURVIVOR) {
+            let score = {
+                user: this.state.user,
+                score: this.props.click,
+                chrono: (this.state.minutesSurvivor < 10 ? `0${this.state.minutesSurvivor}` : this.state.minutesSurvivor) + ":" +
+                    (this.state.secondsSurvivor < 10 ? `0${this.state.secondsSurvivor}` : this.state.secondsSurvivor) + ":" +
+                    (this.state.millisecondsSurvivor < 10 ? `0${this.state.millisecondsSurvivor}` : this.state.millisecondsSurvivor)
+            };
+            this.props.addSurvivorScore(score);
+            setStoreScore(this.props.survivorScore, PATH_SURVIVAL);
+            console.log("plait")
         }
     };
 
-    _fakeButtonStyle = () => {
-
-        return {
-            borderRadius: 50 + "%",
-            height: 40 + "px",
-            width: 40 + "px",
-            position: "absolute",
-            left: this.state.fakePosX + "px",
-            bottom: this.state.fakePosY + "px"
-
-        }
-    };
-
-    _screenSize = () => {
-        return {
-            width: this._area.current.clientWidth,
-            height: this._area.current.clientHeight
-        }
-    };
-
-    submitHandler(e) {
-        e.preventDefault();
+    componentWillUnmount() {
+        clearInterval(this.chrono)
     }
 
     render() {
+        const {milliseconds, seconds} = this.state;
+
         return (
             <div>
-                <Chrono/>
-                <div className="area" ref={this._area}>
-                    <p> Score {this.props.click}</p>
-                    <ul className="circles">
-                        <li/>
-                        <li/>
-                        <li/>
-                        <li/>
-                        <li/>
-                        <li/>
-                        <li/>
-                        <li/>
-                        <li/>
-                        <li/>
-                    </ul>
+                {seconds === 0 && milliseconds === 0
+                    ? <h1>Clicker Training</h1>
+                    :
+                    <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds}</span>
+                    </h1>
+                }
+                <div>
+                    {this.state.start ? null : <button onClick={this._reset} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>}
+                    {this.state.start ? <button onClick={this._start} className = "bRestart" onKeyPress={this.submitHandler}>Start</button> : null}
                 </div>
-                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click} onKeyPress={this.submitHandler} disabled={this.props.finish} id="cible"/>
-                {this.state.fakeClick ? <button id="fakeButton" style={Object.assign(this._fakeButtonStyle(), this._screenSize)} onClick={this._onFakeClick} onKeyPress={this.submitHandler} disabled={this.props.finish}/> : null}
             </div>
         );
     }
@@ -135,21 +178,34 @@ class Game extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        click : state.click,
-        finish: state.finish
+        click: state.click,
+        user: state.user,
+        chrono: state.chrono,
+        gameMode: state.gameMode,
+        survivorScore: state.survivorScore,
+        score: state.score
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getFinish: finish => {
+            dispatch(getFinish((finish)))
+        },
+        addScore: score => {
+            dispatch(addScore(score))
+        },
+        addSurvivorScore: survivorScore => {
+            dispatch(addSurvivorScore(survivorScore))
+        },
+
         addClick: click => {
             dispatch(addClick(click))
         },
-        getGameMode: gameMode => {
-            dispatch(getGameMode(gameMode))
+        setChrono: chrono => {
+            dispatch(setChrono(chrono))
         }
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Game)

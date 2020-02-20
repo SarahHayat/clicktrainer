@@ -13,19 +13,36 @@ function reducer(state = initialState, action){
 
         case "ADD_SCORE":
             let nextState = {...state, score: [...state.score, action.score]};
-            console.log(nextState);
+            nextState.score.sort((a, b) => {
+                if(a.score > b.score) {
+                    return -1;
+                }
+                if(a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
             if (nextState.score.length > 5) {
                 nextState.score.pop()
             }
             return nextState;
 
         case "ADD_SURVIVOR_SCORE":
-            let nextStatesurvivorScore = {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
-            console.log(nextStatesurvivorScore);
-            if (nextStatesurvivorScore.survivorScore.length > 5) {
-                nextStatesurvivorScore.survivorScore.pop()
+            let nextStateSurvivorScore = {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
+
+            if (nextStateSurvivorScore.survivorScore.length > 5) {
+                nextStateSurvivorScore.survivorScore.pop()
             }
-            return nextStatesurvivorScore;
+            nextStateSurvivorScore.score.sort((a, b) => {
+                if(a.score > b.score) {
+                    return -1;
+                }
+                if(a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
+            return nextStateSurvivorScore;
 
             return {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
 
