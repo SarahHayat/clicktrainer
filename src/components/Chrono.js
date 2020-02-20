@@ -13,12 +13,14 @@ class Chrono extends React.Component {
             milliseconds: 0,
             finish: false,
             user: this.props.user,
+            start: true
         };
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
     }
 
     _reset = () => {
+        this.state.start = true;
         clearInterval(this.myInterval);
         this.setState({...this.state, minutes: 1, seconds: 0, milliseconds:0});
         this.state.finish = true;
@@ -26,7 +28,7 @@ class Chrono extends React.Component {
     };
 
     _start = () => {
-        this.state.finish = false;
+        this.state.start = false;
         this.props.getFinish(this.state.finish);
         this.props.addClick(0);
         this._startChrono()
@@ -111,14 +113,14 @@ class Chrono extends React.Component {
         return (
             <div>
                 {seconds === 0 && milliseconds === 0
-                    ? <h1>GAME OVER !</h1>
+                    ? <h1>Clicker Training</h1>
                     :
                     <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds}</span>
                     </h1>
                 }
                 <div>
-                    {this.state.finish ? null : <button onClick={this._reset} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>}
-                    {this.state.finish ? <button onClick={this._start} className = "bRestart" onKeyPress={this.submitHandler}>Start</button> : null}
+                    {this.state.start ? null : <button onClick={this._reset} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>}
+                    {this.state.start ? <button onClick={this._start} className = "bRestart" onKeyPress={this.submitHandler}>Start</button> : null}
                 </div>
             </div>
         );
