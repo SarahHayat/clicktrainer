@@ -2,6 +2,10 @@ import React from "react";
 import {connect} from 'react-redux'
 
 class Score extends React.Component {
+/**
+ * initialisation of a table score and survivor score
+ * @param {*} props 
+ */
 
     constructor(props) {
         super(props);
@@ -25,7 +29,7 @@ class Score extends React.Component {
                     </thead>
                     <tbody>
                     {
-                        this.props.score.map((value, index) => <tr key={index}>
+                        this.props.score.map((value, index) => <tr key={index}> 
                             <td>{value.user}</td>
                             <td>{value.score}</td>
                         </tr>)
