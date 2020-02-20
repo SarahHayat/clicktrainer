@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, addScore, setChrono, getFinish} from "../store/action";
+import {addClick, addScore, setChrono, getFinish, addSurvivorScore} from "../store/action";
+import {GAME_MODE_NORMAL, GAME_MODE_SURVIVOR} from "../gameMode";
 
 class Chrono extends React.Component {
 
@@ -37,7 +38,7 @@ class Chrono extends React.Component {
 
     _startChrono = () => {
         this.setState({...this.state, minutes: 1, seconds: 0});
-        this.myInterval = setInterval(() => {
+        this.chrono = setInterval(() => {
                 const {milliseconds, seconds, minutes} = this.state;
                 if (this.props.chrono !== undefined) {
                     this.setState(({milliseconds}) => ({milliseconds: milliseconds + this.props.chrono}));
@@ -67,12 +68,7 @@ class Chrono extends React.Component {
                 if (milliseconds === 0) {
                     if (seconds === 0) {
                         if (minutes === 0) {
-                            this.props.addScore(
-                                {
-                                    user: this.state.user,
-                                    score: this.props.click
-                                });
-                            clearInterval(this.myInterval)
+                            clearInterval(this.chrono)
                         } else {
                             this.setState(({minutes}) => ({
                                 minutes: minutes - 1,
@@ -82,17 +78,12 @@ class Chrono extends React.Component {
                         }
                     }
                 } else if (seconds === 0 && minutes === 0) {
-                    this.props.addScore(
-                        {
-                            user: this.state.user,
-                            score: this.props.click
-                        });
+                    this._saveScore();
                     this.setState({
                         milliseconds: 0
                     });
-                    console.log(this.props.click);
                     this.props.addScore(this.props.click);
-                    clearInterval(this.myInterval);
+                    clearInterval(this.chrono);
                     this.state.finish = true;
                     this.props.getFinish(this.state.finish);
                 }
@@ -102,9 +93,63 @@ class Chrono extends React.Component {
         )
     };
 
+    _chronoSurvivor = () => {
+        this.chronoSurvivor = setInterval(() => {
+                const {milliseconds, seconds, minutes} = this.state;
+
+                if (milliseconds > 0) {
+                    this.setState(({milliseconds}) => ({
+                        milliseconds: milliseconds + 1
+                    }))
+                }
+
+                if (milliseconds === 99) {
+                    this.setState(({seconds}) => ({
+                        seconds: seconds + 1,
+                        milliseconds: 0
+                    }))
+                }
+                if (milliseconds === 0) {
+                    if (seconds === 0) {
+                        if (minutes === 0) {
+                            clearInterval(this.chronoSurvivor)
+                        } else {
+                            this.setState(({minutes}) => ({
+                                minutes: minutes - 1,
+                                seconds: 59,
+                                milliseconds: 1000
+                            }))
+                        }
+                    }
+                } else if (seconds === 55 && minutes === 0) {
+                    clearInterval(this.chronoSurvivor);
+                }
+            }
+            ,
+            10
+        )
+    };
+
+    _saveScore = () => {
+        if (this.props.gameMode === GAME_MODE_NORMAL) {
+            this.props.addScore(
+                {
+                    user: this.state.user,
+                    score: this.props.click
+                });
+        } else if (this.props.gameMode === GAME_MODE_SURVIVOR) {
+            this.props.addSurvivorScore(
+                {
+                    user: this.state.user,
+                    score: this.props.click,
+                    chrono: this.state.minutes + ":" + this.state.seconds + ":" + this.state.milliseconds
+                });
+        }
+        ;
+    };
 
     componentWillUnmount() {
-        clearInterval(this.myInterval)
+        clearInterval(this.chrono)
     }
 
     render() {
@@ -131,7 +176,8 @@ const mapStateToProps = (state) => {
     return {
         click: state.click,
         user: state.user,
-        chrono: state.chrono
+        chrono: state.chrono,
+        gameMode: state.gameMode
     }
 };
 
@@ -142,6 +188,9 @@ const mapDispatchToProps = dispatch => {
         },
         addScore: score => {
             dispatch(addScore(score))
+        },
+        addSurvivorScore: survivorScore => {
+            dispatch(addSurvivorScore(survivorScore))
         },
 
         addClick: click => {

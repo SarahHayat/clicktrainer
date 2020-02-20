@@ -1,6 +1,7 @@
 const initialState = {
     click: 0,
-    score: []
+    score: [],
+    survivorScore: []
 };
 
 function reducer(state = initialState, action){
@@ -11,6 +12,10 @@ function reducer(state = initialState, action){
 
         case "ADD_SCORE":
             return {...state, score: [...state.score, action.score]};
+
+        case "ADD_SURVIVOR_SCORE":
+            console.log({...state, survivorScore: [...state.survivorScore, action.survivorScore]});
+            return {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
 
         case "SET_USER":
             return {...state, user:  action.user};

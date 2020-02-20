@@ -1,7 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick} from "../store/action";
+import {addClick, getGameMode} from "../store/action";
 import Chrono from "./Chrono";
+import {GAME_MODE_NORMAL} from "../gameMode";
 
 class Game extends React.Component {
 
@@ -16,7 +17,8 @@ class Game extends React.Component {
             fakePosY: 50,
             click: 0,
             fakeClick: false
-        }
+        };
+        this.props.getGameMode(GAME_MODE_NORMAL)
     }
 
     _click = () => {
@@ -144,6 +146,9 @@ const mapDispatchToProps = dispatch => {
     return {
         addClick: click => {
             dispatch(addClick(click))
+        },
+        getGameMode: gameMode => {
+            dispatch(getGameMode(gameMode))
         }
     }
 };

@@ -1,7 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, getClick, setChrono} from "../store/action";
+import {addClick, getClick, getGameMode, setChrono} from "../store/action";
 import Chrono from "./Chrono";
+import {GAME_MODE_SURVIVOR} from "../gameMode";
 
 class Survivor extends React.Component {
 
@@ -14,7 +15,9 @@ class Survivor extends React.Component {
             posY: 100,
             click: 0,
             isClick: false
-        }
+        };
+        this.props.getGameMode(GAME_MODE_SURVIVOR)
+
     }
 
     _click = () => {
@@ -28,7 +31,7 @@ class Survivor extends React.Component {
         this.props.addClick(this.state.click);
         this.state.isCLick = true;
         this.props.getClick(this.state.isCLick);
-        this.props.setChrono(500);
+        this.props.setChrono(50);
 
 
     };
@@ -94,6 +97,9 @@ const mapDispatchToProps = dispatch => {
         },
         setChrono: chrono => {
             dispatch(setChrono(chrono))
+        },
+        getGameMode: gameMode => {
+            dispatch(getGameMode(gameMode))
         }
     }
 };
