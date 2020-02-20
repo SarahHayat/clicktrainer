@@ -50,8 +50,6 @@ class Game extends React.Component {
 
         }
         this.props.addClick(this.state.click);
-            console.log(this.state.posX);
-            console.log(this.state.posY);
     };
 
     _fakeClick = () => {
