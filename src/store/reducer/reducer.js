@@ -22,9 +22,11 @@ function reducer(state = initialState, action){
             return {...state, chrono:  action.chrono};
 
         case "GET_CLICK":
-            console.log({...state, isClick:  action.isClick})
             return {...state, isClick:  action.isClick};
-            
+
+        case "GET_FINISH":
+            return {...state, finish: action.finish};
+
             default:
                 return state;
     }

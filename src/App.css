@@ -176,42 +176,115 @@
   }
 
 }
+h1{
+  transition-duration: 1s;
 
+  text-align: center;
+}
 h1 span {
-  color: white;
+  transition-duration: 1s;
+  color: rgb(111, 0, 136);
+
+  text-align: center;
 }
 
-.App {
+th{
+  color: white;
+  font-size: 50px;
+}
+tbody{
+  transition-duration: 0.7s;
+  color: white;
+  font-size: 50px;
+}
+
+nav ul {
+  box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+
+  transition-duration: 0.7s;
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav ul li {
+  box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+
+
+  transition-duration: 0.7s;
+
+  float: left;
+}
+
+nav ul li a {
+
+  transition-duration: 0.7s;
+
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+nav ul li a:hover {
+
+  transition-duration: 0.7s;
+  background-color: #111;
+}
+
+.area p{             transition-duration: 0.7s;
+
+  color: white;
+  font-size: 40px;
+  display: inline;
+  position: fixed;
+}
+
+.App {             transition-duration: 0.7s;
+
   cursor: crosshair;
 
   text-align: center;
 }
 
-.App-logo {
+.App-logo {             transition-duration: 0.7s;
+
   cursor: crosshair;
 
   height: 40vmin;
   pointer-events: none;
 }
-body{
+body{             transition-duration: 0.7s;
+
   cursor: crosshair;
 }
-img{
+img{             transition-duration: 0.7s;
+
   cursor: crosshair;
 }
-a:link{
+a:link{             transition-duration: 0.7s;
+
   cursor: crosshair;
 }
-button:before{
+button:before{             transition-duration: 0.7s;
+
   cursor: crosshair;
 
 }button{
+
    cursor: crosshair;
    size: 20px;
 
  }
 
-
+.bRestart{
+  color: white;
+  background-color: grey;
+}
 
 @keyframes gradient {
 
@@ -221,7 +294,7 @@ button:before{
   }
   25% {
     transition-duration: 1s;
-    background: radial-gradient(circle at center, rgb(79, 58, 122) 24%, #fff 25%, #fff 100%);
+    background: radial-gradient(circle at center, rgb(103, 62, 122) 24%, #fff 25%, #fff 100%);
   }
   50% {
     transition-duration: 1s;
@@ -229,44 +302,39 @@ button:before{
   }
   75% {
     transition-duration: 1s;
-    background: radial-gradient(circle at center, rgb(148, 106, 251) 74%, #fff 75%, #fff 100%);
+    background: radial-gradient(circle at center, rgb(115, 110, 251) 74%, #fff 75%, #fff 100%);
   }
   100% {
     transition-duration: 1s;
     color: #fff;
-    background: radial-gradient(circle at center, #946afb 99%, #fff 100%, #fff 100%);
+    background: radial-gradient(circle at center, #7297fb 99%, #fff 100%, #fff 100%);
   }
 }
 .area{
-  background: #4e54c8;
-  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+
+  background: -webkit-linear-gradient( #387efb, #7a0099 80%);
   width: 100%;
   height:100vh;
 
 
 }
 
+
 body {
-  background: #680086;
+    background: no-repeat;
+  background:  linear-gradient( rgba(53, 108, 217, 0.86) 0% , #387efb 10%);
+    width: 100%;
+    height: 100%;
   overflow: hidden;
 }
 
+html{
+  width: 100%;
+  height: 100%;
+  background: #282c34 no-repeat;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-button {
+#cible {
 
   background: url(asset/target_bg.png) no-repeat center center ;
   -webkit-background-size: cover;
@@ -286,7 +354,7 @@ button {
   box-shadow: 0 6px 6px rgba(255, 0, 0, 0.51);
   outline: none;
 }
-button:active {
+#cible:active {
   /* set time duration to your needs */
   animation: gradient 100ms;
   background: #946afb;
@@ -294,6 +362,26 @@ button:active {
   box-shadow: none;
 }
 
+#fakeButton {
+
+  background: url(asset/target_bg.png) no-repeat center center ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+
+  width: 350px;
+  height: 60px;
+  border: none;
+  border-radius: 5px;
+
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #666;
+  box-shadow: 0 6px 6px rgba(255, 0, 50, 0.51);
+  outline: none;
+}
 
 
 @media (prefers-reduced-motion: no-preference) {
@@ -311,7 +399,8 @@ a:link{
   cursor: pointer;
 }
 
-.App-header {
+.App-header {             transition-duration: 0.7s;
+
   cursor: crosshair;
 
   background-color: #282c34;
@@ -326,11 +415,10 @@ a:link{
 
 .App-link {
   cursor: crosshair;
-
-  color: #61dafb;
 }
 
-.gameScreen {
+.gameScreen {             transition-duration: 0.7s;
+
   height: 1000px;
   width: 1000px;
 }

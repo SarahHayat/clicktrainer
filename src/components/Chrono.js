@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, addScore, setChrono} from "../store/action";
+import {addClick, addScore, setChrono, getFinish} from "../store/action";
 
 class Chrono extends React.Component {
 
@@ -11,14 +11,17 @@ class Chrono extends React.Component {
             seconds: 0,
             milliseconds: 0,
             finish: false,
-            user: this.props.user
-
+            user: this.props.user,
         };
-        this._startChrono()
     }
 
+    _resetChrono = () => {
+        clearInterval(this.myInterval);
+        this.setState({...this.state, minutes: 1, seconds: 0})
+    };
 
     _startChrono = () => {
+        this.setState({...this.state, minutes: 1, seconds: 0});
         this.myInterval = setInterval(() => {
                 const {milliseconds, seconds, minutes} = this.state;
                 if (this.props.chrono !== undefined) {
@@ -76,6 +79,8 @@ class Chrono extends React.Component {
                     this.props.addScore(this.props.click);
                     clearInterval(this.myInterval);
                     this.props.addClick(0);
+                    this.state.finish = true;
+                    this.props.getFinish(this.state.finish);
                 }
             }
             ,
@@ -99,6 +104,10 @@ class Chrono extends React.Component {
                     <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds}</span>
                     </h1>
                 }
+                <div>
+                    <button onClick={this._resetChrono} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>
+                    <button onClick={this._startChrono} className = "bRestart" onKeyPress={this.submitHandler}>Start</button>
+                </div>
             </div>
         );
     }
@@ -114,6 +123,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        getFinish: finish => {
+            dispatch(getFinish((finish)))
+        },
         addScore: score => {
             dispatch(addScore(score))
         },

@@ -4,6 +4,7 @@ export const SET_USER = "SET_USER";
 export const GET_CHRONO = "GET_CHRONO";
 export const SET_CHRONO = "SET_CHRONO";
 export const GET_CLICK = "GET_CLICK";
+export const GET_FINISH = "GET_FINISH";
 
 
 export function addClick(click){
@@ -24,4 +25,8 @@ export function getChrono(chrono) {
 }
 export function getClick(isClick) {
     return  {type: GET_CLICK, isClick};
+}
+
+export function getFinish(finish) {
+    return {type: GET_FINISH, finish}
 }
