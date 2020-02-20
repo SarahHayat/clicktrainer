@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {addClick} from "../store/action";
+import Chrono from "./Chrono";
 
 class Game extends React.Component {
 
@@ -36,8 +37,6 @@ class Game extends React.Component {
             borderRadius: 50 + "%",
             height: 40 + "px",
             width: 40 + "px",
-            background: "red",
-            color: "white",
             position: "absolute",
             left: this.state.posX + "px",
             bottom: this.state.posY + "px"
@@ -54,6 +53,7 @@ class Game extends React.Component {
     render() {
         return (
             <div>
+                <Chrono/>
                 <div className="area" ref={this._area}>
                     <p> Score {this.state.score}</p>
                     <ul className="circles">

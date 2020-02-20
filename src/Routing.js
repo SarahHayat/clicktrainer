@@ -30,7 +30,6 @@ class Routing extends React.Component {
                     </nav>
                     <Switch>
                         <Route exact path="/">
-                            <Chrono/>
                             <Game/>
                         </Route>
                         <Route path="/Score">
