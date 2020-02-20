@@ -57,13 +57,8 @@ class Game extends React.Component {
         }else{
 
         }
-<<<<<<< HEAD
-        this.props.addClick(this.state.click); //add to the score
-            //console.log(this.state.posX);
-            //console.log(this.state.posY);
-=======
-        this.props.addClick(this.state.click);
->>>>>>> dev
+
+        this.props.addClick(this.state.click);//add to score table 
     };
 /**
  * the function fakeClick allows to appear and disappear the fake button

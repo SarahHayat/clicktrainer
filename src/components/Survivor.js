@@ -7,7 +7,10 @@ import {GAME_MODE_SURVIVOR} from "../gameMode";
 class Survivor extends React.Component {
 
     _area = React.createRef();
-
+/**
+ * Initialisation of the button and the score 
+ * @param {*} props 
+ */
     constructor(props) {
         super(props);
         this.state = {
@@ -19,23 +22,30 @@ class Survivor extends React.Component {
         this.props.getGameMode(GAME_MODE_SURVIVOR)
 
     }
-
+    /**
+     * the function click is activate when we click on the button.
+     * For the button, when we click, he change position and add to the timer 50 milliseconds.
+     */
     _click = () => {
-        let maxX = this._area.current.clientWidth * 0.9;
+        let maxX = this._area.current.clientWidth * 0.9; //limitation of the area of the button
         let maxY = this._area.current.clientHeight * 0.85;
         this.state.click++;
-        this.props.addClick(this.state.click)
+        this.props.addClick(this.state.click) //add to the score
         this.setState({
-            ...this.state, posX: Math.floor(Math.random() * maxX),
+            ...this.state, posX: Math.floor(Math.random() * maxX), //randomize the new position of the button
             posY: Math.floor(Math.random() * maxY), click: this.state.click
         });
         this.props.addClick(this.state.click);
         this.state.isCLick = true;
         this.props.getClick(this.state.isCLick);
-        this.props.setChrono(50);
+        this.props.setChrono(50);//add 50 milliseconds in the timer 
 
 
     };
+
+     /**
+     * style of the button
+     */
 
     _buttonStyle = () => {
 
@@ -48,6 +58,10 @@ class Survivor extends React.Component {
             bottom: this.state.posY + "px"
         }
     };
+
+    /**
+     * size of the area game
+     */
 
     _screenSize = () => {
         return {
