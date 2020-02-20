@@ -103,7 +103,7 @@ class Game extends React.Component {
             width: this._area.current.clientWidth,
             height: this._area.current.clientHeight
         }
-    };
+    }
 
     submitHandler(e) {
         e.preventDefault();
@@ -131,6 +131,8 @@ class Game extends React.Component {
                 <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click} onKeyPress={this.submitHandler} disabled={this.props.finish} id="cible"/>
                 {this.state.fakeClick ? <button id="fakeButton" style={Object.assign(this._fakeButtonStyle(), this._screenSize)} onClick={this._onFakeClick} onKeyPress={this.submitHandler} disabled={this.props.finish}/> : null}
             </div>
+            
+             
         );
     }
 }

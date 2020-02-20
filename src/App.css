@@ -391,6 +391,7 @@ html{
   box-shadow: none;
 }
 
+#fakeButton {
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
