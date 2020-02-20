@@ -10,6 +10,7 @@ class Score extends React.Component {
 
     render(){
         return(
+
             <table>
             <thead><tr><th>Score</th></tr></thead><tbody>
                     {

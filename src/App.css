@@ -297,9 +297,16 @@ button:before{             transition-duration: 0.7s;
 
 
 body {
-
-  background: linear-gradient( rgba(53, 108, 217, 0.86) 0% , #387efb 10%);
+    background: no-repeat;
+  background:  linear-gradient( rgba(53, 108, 217, 0.86) 0% , #387efb 10%);
+    width: 100%;
+    height: 100%;
   overflow: hidden;
+}
+html{
+    width: 100%;
+    height: 100%;
+    background: #282c34 no-repeat;
 }
 
 

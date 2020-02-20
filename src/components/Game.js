@@ -21,6 +21,7 @@ class Game extends React.Component {
         console.log("browserHeight", this._area.current.clientHeight);
         let maxX = this._area.current.clientWidth * 0.9;
         let maxY = this._area.current.clientHeight * 0.85;
+        // eslint-disable-next-line react/no-direct-mutation-state
         this.state.score++;
         this.setState({
             ...this.state, posX: Math.floor(Math.random() * maxX),
@@ -48,7 +49,7 @@ class Game extends React.Component {
             width: this._area.current.clientWidth,
             height: this._area.current.clientHeight
         }
-    }
+    };
 
     render() {
         return (
