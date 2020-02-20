@@ -9,6 +9,7 @@ import Score from "./components/Score";
 class Routing extends React.Component {
 
 
+    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
     }
@@ -21,7 +22,7 @@ class Routing extends React.Component {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Game</Link>
+                                <Link  to="/">Game</Link>
                             </li>
                             <li>
                                 <Link to="/Score">Score</Link>
