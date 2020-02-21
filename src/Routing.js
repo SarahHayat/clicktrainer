@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Link, Route, Switch, withRouter} from "react-router-dom";
 import React from "react";
 import "./App.css"
 import Normal from "./components/Normal";
@@ -7,6 +7,7 @@ import Score from "./components/Score";
 import Users from "./components/Users";
 import Insane from "./components/Insane";
 import About from "./components/About";
+import {connect} from "react-redux";
 
 
 class Routing extends React.Component {
@@ -44,7 +45,9 @@ class Routing extends React.Component {
                             <li>
                                 <Link to="/About">About</Link>
                             </li>
+                            <p className="bou"> {this.props.user}</p>
                         </ul>
+
                     </nav>
                     <Switch>
                         <Route exact path="/">
@@ -65,6 +68,7 @@ class Routing extends React.Component {
                         <Route path="/About">
                             <About/>
                         </Route>
+
                     </Switch>
                 </div>
             </Router>
@@ -72,6 +76,13 @@ class Routing extends React.Component {
     }
 }
 
-export default Routing
+const mapStateToProps = (state) => {
+    return {
+        user : state.user,
+
+    }
+};
+export default (connect(mapStateToProps)(Routing));
+
 
 

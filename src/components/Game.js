@@ -188,11 +188,13 @@ class Game extends React.Component {
 
         return (
             <div>
+
                 {seconds === 0 && milliseconds === 0
                     ? <h1>Clicker Training</h1>
                     :
-                    <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds}</span>
+                    <h1>Time Remaining: <span>{seconds < 10 ? `0${seconds}` : seconds}:{milliseconds}  </span>
                     </h1>
+
                 }
                 <div>
                     {this.state.start ? null : <button onClick={this._reset} className="bRestart"
@@ -200,6 +202,7 @@ class Game extends React.Component {
                     {this.state.start ? <button onClick={this._start} className="bRestart"
                                                 onKeyPress={this.submitHandler}>Start</button> : null}
                 </div>
+
             </div>
         );
     }
