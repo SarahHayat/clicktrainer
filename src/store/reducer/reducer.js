@@ -29,7 +29,7 @@ function reducer(state = initialState, action){
             }
             return nextState;
 
-        case "ADD_INSANE_SCORE":
+        case "ADD_INSANE_SCORE": //add the insane score
             let nextStateInsaneScore = {...state, insaneScore: [...state.insaneScore, action.insaneScore]};
             nextStateInsaneScore.insaneScore.sort((a, b) => {
                 if(a.score > b.score) {
@@ -45,7 +45,7 @@ function reducer(state = initialState, action){
             }
             return nextStateInsaneScore;
 
-        case "ADD_SURVIVOR_SCORE":
+        case "ADD_SURVIVOR_SCORE": //add survivor score
             let nextStateSurvivorScore = {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
             nextStateSurvivorScore.survivorScore.sort((a, b) => {
                 if(a.score > b.score) {

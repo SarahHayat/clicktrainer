@@ -6,9 +6,21 @@ export const PATH_INSANE = "/insane";
 
 let score = [];
 
+/**
+ * set the score in firebase
+ * @param {*} score
+ * @param {*} path
+ */
+
 export function setStoreScore(score, path) {
     firebase.database().ref(path).set(score).then(r => console.log(r));
 }
+
+/**
+ * get the score in firebase
+ * @param {*} score
+ * @param {*} path
+ */
 
 export function getStoreScore(path) {
     firebase.database().ref(path).on('value', (snap) => {

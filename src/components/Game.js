@@ -15,6 +15,10 @@ import {withRouter} from "react-router-dom";
 
 class Game extends React.Component {
 
+    /**
+     * Initialisation of the timer and the survivor timer
+     * @param {*} props
+     */
 
     constructor(props) {
         super(props);
@@ -32,19 +36,22 @@ class Game extends React.Component {
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
 
-
-            getStoreScore(PATH_NORMAL).map(el => {
+            getStoreScore(PATH_NORMAL).map(el => { // add the score
                 this.props.addScore(el)
             });
-            getStoreScore(PATH_SURVIVAL).map(el => {
+            getStoreScore(PATH_SURVIVAL).map(el => { // add the survivor score
                 this.props.addSurvivorScore(el)
             });
-            getStoreScore(PATH_INSANE).map(el => {
+            getStoreScore(PATH_INSANE).map(el => { // add the insane score
                 this.props.addInsaneScore(el)
             });
         console.log(this.props.score)
         this.props.addClick(0);
     }
+
+    /**
+     * the  function reset is allow to reset the timer, the score and the game
+     */
 
     _reset = () => {
         this.state.start = true;
@@ -56,6 +63,10 @@ class Game extends React.Component {
         this.props.addClick(0);
     };
 
+    /**
+     * the function start is allow to start the game and the timer
+     */
+
     _start = () => {
         this.state.start = false;
         this.state.finish = false;
@@ -65,6 +76,11 @@ class Game extends React.Component {
             this._chronoSurvivor();
         }
     }
+
+/**
+ * the function startChrono is allow to operate the timer, and if the timer = 0, so the score is saved on the score's table
+ * this timer is used only on the game mode
+ */
 
     _startChrono = () => {
         this.setState({...this.state, minutes: 1, seconds: 0});
@@ -121,6 +137,11 @@ class Game extends React.Component {
         )
     };
 
+/**
+ * the function startChrono is allow to operate the SurvivorTimer, and if the timer = 0, so the time is saved on the score's table
+ * this timer is used only on the survivor mode
+ */
+
     _chronoSurvivor = () => {
         this.setState({...this.state, minutesSurvivor: 0, secondsSurvivor: 0, millisecondsSurvivor: 0});
         this.chronoSurvivor = setInterval(() => {
@@ -147,6 +168,10 @@ class Game extends React.Component {
             }
         }, 10)
     };
+
+/**
+ * the function saveScore is allow to save the score on the score's table
+ */
 
     _saveScore = () => {
         if (this.props.gameMode === GAME_MODE_NORMAL) {
