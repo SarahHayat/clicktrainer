@@ -91,6 +91,13 @@ th{
   margin: 20px;
   padding: 20px;
   font-family: "Tahoma", Arial, sans-serif;
+  overflow-scrolling: auto;
+}
+p{
+  color: white;
+  text-align: right;
+  font-size: 40px;
+  padding-right: 15px;
 }
 
 label{
