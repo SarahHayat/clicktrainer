@@ -3,6 +3,10 @@ import {connect} from 'react-redux'
 import {withRouter} from "react-router-dom";
 
 class Score extends React.Component {
+/**
+ * initialisation of a table score and survivor score
+ * @param {*} props
+ */
 
     constructor(props) {
         super(props);
@@ -16,6 +20,7 @@ class Score extends React.Component {
     render() {
         return (
             <div>
+                <footer> © L.E.S.A.H, Inc </footer>
                 <table>
                     <thead>
                     <tr>

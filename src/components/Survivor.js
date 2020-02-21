@@ -8,7 +8,10 @@ import {withRouter} from "react-router-dom";
 class Survivor extends React.Component {
 
     _area = React.createRef();
-
+/**
+ * Initialisation of the button and the score
+ * @param {*} props
+ */
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +23,10 @@ class Survivor extends React.Component {
         this.props.setGameMode(GAME_MODE_SURVIVOR)
 
     }
-
+    /**
+     * the function click is activate when we click on the button.
+     * For the button, when we click, he change position and add to the timer 50 milliseconds.
+     */
     _click = () => {
         let maxX = this._area.current.clientWidth * 0.9;
         let maxY = this._area.current.clientHeight * 0.85;
@@ -39,6 +45,10 @@ class Survivor extends React.Component {
 
     };
 
+     /**
+     * style of the button
+     */
+
     _buttonStyle = () => {
 
         return {
@@ -50,6 +60,10 @@ class Survivor extends React.Component {
             bottom: this.state.posY + "px"
         }
     };
+
+    /**
+     * size of the area game
+     */
 
     _screenSize = () => {
         return {

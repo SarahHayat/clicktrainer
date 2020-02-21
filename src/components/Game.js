@@ -1,6 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, addScore, setChrono, getFinish, addSurvivorScore, addInsaneScore} from "../store/action";
+import {
+    addClick,
+    addScore,
+    setChrono,
+    getFinish,
+    addSurvivorScore,
+    addInsaneScore,
+    setFirstTime
+} from "../store/action";
 import {GAME_MODE_INSANE, GAME_MODE_NORMAL, GAME_MODE_SURVIVOR} from "../gameMode";
 import {getStoreScore, PATH_INSANE, PATH_NORMAL, PATH_SURVIVAL, setStoreScore} from "../firebase/dataShare";
 import {withRouter} from "react-router-dom";
@@ -23,9 +31,21 @@ class Game extends React.Component {
         };
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
-        getStoreScore(PATH_NORMAL).map(el => {this.props.addScore(el)});
-        getStoreScore(PATH_SURVIVAL).map(el => {this.props.addSurvivorScore(el)});
-        getStoreScore(PATH_INSANE).map(el => {this.props.addInsaneScore(el)});
+
+        if(this.props.score.length === 0 &&
+            this.props.insaneScore.length === 0 &&
+            this.props.survivorScore.length === 0) {
+            getStoreScore(PATH_NORMAL).map(el => {
+                this.props.addScore(el)
+            });
+            getStoreScore(PATH_SURVIVAL).map(el => {
+                this.props.addSurvivorScore(el)
+            });
+            getStoreScore(PATH_INSANE).map(el => {
+                this.props.addInsaneScore(el)
+            });
+        }
+        console.log(this.props.score)
         this.props.addClick(0);
     }
 
@@ -33,7 +53,7 @@ class Game extends React.Component {
         this.state.start = true;
         clearInterval(this.chrono);
         clearInterval(this.chronoSurvivor);
-        this.setState({...this.state, minutes: 1, seconds: 0, milliseconds:0});
+        this.setState({...this.state, minutes: 1, seconds: 0, milliseconds: 0});
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
         this.props.addClick(0);
@@ -90,7 +110,7 @@ class Game extends React.Component {
                             }))
                         }
                     }
-                } else if (seconds === 55 && minutes === 0) {
+                } else if (seconds === 0) {
                     this.setState({
                         milliseconds: 0
                     });
@@ -107,25 +127,25 @@ class Game extends React.Component {
     _chronoSurvivor = () => {
         this.setState({...this.state, minutesSurvivor: 0, secondsSurvivor: 0, millisecondsSurvivor: 0});
         this.chronoSurvivor = setInterval(() => {
-            const { secondsSurvivor, minutesSurvivor, millisecondsSurvivor } = this.state;
+            const {secondsSurvivor, minutesSurvivor, millisecondsSurvivor} = this.state;
             if (millisecondsSurvivor >= 0) {
-                this.setState(({ millisecondsSurvivor }) => ({
+                this.setState(({millisecondsSurvivor}) => ({
                     millisecondsSurvivor: millisecondsSurvivor + 1
                 }))
             }
             if (millisecondsSurvivor === 99) {
-                this.setState(({ secondsSurvivor }) => ({
+                this.setState(({secondsSurvivor}) => ({
                     secondsSurvivor: secondsSurvivor + 1,
                     millisecondsSurvivor: 0
                 }))
             }
             if (secondsSurvivor === 59) {
-                this.setState(({ minutesSurvivor }) => ({
+                this.setState(({minutesSurvivor}) => ({
                     minutesSurvivor: minutesSurvivor + 1,
                     secondsSurvivor: 0
                 }))
             }
-            if (this.state.finish){
+            if (this.state.finish) {
                 clearInterval(this.chronoSurvivor);
             }
         }, 10)
@@ -175,8 +195,10 @@ class Game extends React.Component {
                     </h1>
                 }
                 <div>
-                    {this.state.start ? null : <button onClick={this._reset} className = "bRestart" onKeyPress={this.submitHandler}>Reset</button>}
-                    {this.state.start ? <button onClick={this._start} className = "bRestart" onKeyPress={this.submitHandler}>Start</button> : null}
+                    {this.state.start ? null : <button onClick={this._reset} className="bRestart"
+                                                       onKeyPress={this.submitHandler}>Reset</button>}
+                    {this.state.start ? <button onClick={this._start} className="bRestart"
+                                                onKeyPress={this.submitHandler}>Start</button> : null}
                 </div>
             </div>
         );
@@ -191,7 +213,8 @@ const mapStateToProps = (state) => {
         gameMode: state.gameMode,
         survivorScore: state.survivorScore,
         score: state.score,
-        insaneScore: state.insaneScore
+        insaneScore: state.insaneScore,
+        firstTime: state.firstTime
     }
 };
 
@@ -214,6 +237,9 @@ const mapDispatchToProps = dispatch => {
         },
         setChrono: chrono => {
             dispatch(setChrono(chrono))
+        },
+        setFirstTime: firsTime => {
+            dispatch(setFirstTime(firsTime))
         }
     }
 };

@@ -3,17 +3,17 @@ const initialState = {
     score: [],
     survivorScore: [],
     insaneScore: [],
-    user: ""
+    user: "",
+    firstTime: false
 };
 
 function reducer(state = initialState, action){
 
     switch (action.type){
-
-        case "ADD_CLICK":
+        case "ADD_CLICK": //count the click
             return {...state, click:  action.click};
 
-        case "ADD_SCORE":
+        case "ADD_SCORE": //add to the table game score
             let nextState = {...state, score: [...state.score, action.score]};
             nextState.score.sort((a, b) => {
                 if(a.score > b.score) {
@@ -24,7 +24,7 @@ function reducer(state = initialState, action){
                 }
                 return 0;
             });
-            if (nextState.score.length > 5) {
+            if (nextState.score.length > 5) {//limit of the five best scores
                 nextState.score.pop()
             }
             return nextState;
@@ -40,7 +40,7 @@ function reducer(state = initialState, action){
                 }
                 return 0;
             });
-            if (nextStateInsaneScore.score.length > 5) {
+            if (nextStateInsaneScore.score.length > 5) {//add to the table survivor score
                 nextStateInsaneScore.score.pop()
             }
             return nextStateInsaneScore;
@@ -62,23 +62,26 @@ function reducer(state = initialState, action){
             return nextStateSurvivorScore;
 
 
-        case "SET_USER":
+        case "SET_USER": // set the user
             return {...state, user:  action.user};
 
-        case "GET_CHRONO":
+        case "GET_CHRONO": //get the time for the score
             return {...state, chrono:  action.chrono};
 
-        case "SET_CHRONO":
+        case "SET_CHRONO": //set the time
             return {...state, chrono:  action.chrono};
 
-        case "GET_CLICK":
+        case "GET_CLICK"://get the click
             return {...state, isClick:  action.isClick};
 
-        case "GET_FINISH":
+        case "GET_FINISH"://returen the state of time
             return {...state, finish: action.finish};
 
-        case "SET_GAME_MODE":
+        case "SET_GAME_MODE"://get the mode game
             return {...state, gameMode: action.gameMode};
+
+        case "SET_FIRST_TIME"://Set boolean for the first openning app
+            return {...state, firstTime: action.firstTime};
 
             default:
                 return state;

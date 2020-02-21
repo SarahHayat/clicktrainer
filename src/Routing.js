@@ -10,7 +10,10 @@ import Insane from "./components/Insane";
 
 class Routing extends React.Component {
 
-
+/**
+ * Home page
+ * @param {*} props
+ */
     constructor(props) {
         super(props);
     }

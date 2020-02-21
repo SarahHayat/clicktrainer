@@ -8,6 +8,7 @@ export const SET_CHRONO = "SET_CHRONO";
 export const GET_CLICK = "GET_CLICK";
 export const GET_FINISH = "GET_FINISH";
 export const SET_GAME_MODE = "SET_GAME_MODE";
+export const SET_FIRST_TIME = "SET_FIRST_TIME";
 
 
 export function addClick(click){
@@ -36,4 +37,8 @@ export function setGameMode(gameMode) {
 }
 export function getFinish(finish) {
     return {type: GET_FINISH, finish}
+}
+export function setFirstTime(firstTime) {
+    console.log(SET_FIRST_TIME, firstTime)
+    return {type: SET_FIRST_TIME, firstTime}
 }
