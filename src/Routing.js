@@ -1,18 +1,21 @@
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import React from "react";
 import "./App.css"
-import Game from "./components/Game";
-import Chrono from "./components/Chrono";
+import Normal from "./components/Normal";
+import Survivor from "./components/Survivor";
+import Score from "./components/Score";
+import Users from "./components/Users";
+import Insane from "./components/Insane";
 
 
-export default class Routing extends React.Component {
+class Routing extends React.Component {
 
-
+/**
+ * Home page
+ * @param {*} props
+ */
     constructor(props) {
         super(props);
-        this.state = {
-            name: "",
-        }
     }
 
 
@@ -23,24 +26,45 @@ export default class Routing extends React.Component {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Game</Link>
+                                <Link to="/">Normal</Link>
                             </li>
-
+                            <li>
+                                <Link to="/Survivor">Survivor</Link>
+                            </li>
+                            <li>
+                                <Link to="/Insane">Insane</Link>
+                            </li>
+                            <li>
+                                <Link to="/Score">Score</Link>
+                            </li>
+                            <li>
+                                <Link to="/Users">Users</Link>
+                            </li>
                         </ul>
                     </nav>
-                    {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
                     <Switch>
                         <Route exact path="/">
-                            <Chrono/>
-                            <Game/>
+                            <Normal/>
                         </Route>
-
+                        <Route path="/Survivor">
+                            <Survivor/>
+                        </Route>
+                        <Route path="/Insane">
+                            <Insane/>
+                        </Route>
+                        <Route path="/Score">
+                            <Score/>
+                        </Route>
+                        <Route path="/Users">
+                            <Users/>
+                        </Route>
                     </Switch>
                 </div>
             </Router>
         )
     }
 }
+
+export default Routing
 
 
