@@ -110,35 +110,44 @@ label{
   margin: 5px;
   position: relative;
 }
-label input{
-  -webkit-transition-duration: 2s; /*durée d'animation*/
-  transition-duration: 2s; /*durée d'animation*/
-  display: inline-block;
-  border-radius: 10px;
-  background-color: rgba(250, 252, 255, 0.98);
-  color: #000000;
-  text-align: center;
-  padding: 16px;
-  width: 200px;
-  cursor: pointer;
-  margin: 2rem;
-  font-size: 20px;
-  position: relative;
+
+label input {
+    -webkit-transition-duration: 2s; /*durée d'animation*/
+    transition-duration: 2s; /*durée d'animation*/
+    display: inline-block;
+    border-radius: 10px;
+    border: black;
+    border: solid 3px;
+    background-color: rgba(250, 252, 255, 0.98);
+    color: #000000;
+    text-align: center;
+    padding: 16px;
+    width: 200px;
+    cursor: pointer;
+    margin: 2rem;
+    font-size: 20px;
+    position: relative;
+    outline: none;
 }
-input:nth-child(2){
-  -webkit-transition-duration: 2s; /*durée d'animation*/
-  transition-duration: 2s; /*durée d'animation*/
-  display: inline-block;
-  border-radius: 10px;
-  background-color: #fafcff;
-  color: #000000;
-  text-align: center;
-  font-size: 18px;
-  padding: 11px;
-  width: 200px;
-  cursor: pointer;
-  margin: 5rem 1rem 1rem 1rem;
-  position: relative;
+
+input[type=submit] {
+    font-size: x-large;
+}
+
+input:nth-child(2) {
+    -webkit-transition-duration: 2s; /*durée d'animation*/
+    transition-duration: 2s; /*durée d'animation*/
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #fafcff;
+    color: #000000;
+    text-align: center;
+    font-size: 18px;
+    padding: 11px;
+    width: 200px;
+    cursor: pointer;
+    margin: 5rem 1rem 1rem 1rem;
+    position: relative;
 }
 
 option{
@@ -554,3 +563,36 @@ a:link{
     transform: rotate(360deg);
   }
 }
+
+.scoreTables {
+  display: flex;
+  height: 45em;
+  overflow: scroll;
+  justify-content: space-around;
+}
+
+.scoreTables thead{
+  background-color: rgba(0, 0, 0, 0.46);
+  font-size: small;
+
+}
+.scoreTables td {
+  text-align: center;
+  font-size: large;
+
+}
+
+.normalTable {
+  background-color: indianred;
+  margin: 1em;
+}
+
+.survivorTable {
+  background-color: cornflowerblue;
+  margin: 1em;
+}
+.insaneTable {
+  background-color: darkolivegreen;
+  margin: 1em;
+}
+

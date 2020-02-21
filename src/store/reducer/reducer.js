@@ -24,7 +24,7 @@ function reducer(state = initialState, action){
                 }
                 return 0;
             });
-            if (nextState.score.length > 5) {//limit of the five best scores
+            while (nextState.score.length > 5) {//limit of the five best scores
                 nextState.score.pop()
             }
             return nextState;
@@ -40,8 +40,8 @@ function reducer(state = initialState, action){
                 }
                 return 0;
             });
-            if (nextStateInsaneScore.score.length > 5) {//add to the table survivor score
-                nextStateInsaneScore.score.pop()
+            while (nextStateInsaneScore.insaneScore.length > 5) {//add to the table survivor score
+                nextStateInsaneScore.insaneScore.pop()
             }
             return nextStateInsaneScore;
 
@@ -56,7 +56,7 @@ function reducer(state = initialState, action){
                 }
                 return 0;
             });
-            if (nextStateSurvivorScore.survivorScore.length > 5) {
+            while (nextStateSurvivorScore.survivorScore.length > 5) {
                 nextStateSurvivorScore.survivorScore.pop()
             }
             return nextStateSurvivorScore;
