@@ -20,9 +20,9 @@ class Score extends React.Component {
     render() {
         return (
             <div className="scoreTables">
-                <footer> © L.E.S.A.H, Inc </footer>
                 <table className="normalTable" >
                     <thead>
+                    <h2 id = "gamemode1"> Normal </h2>
                     <tr>
                         <th>Name</th>
                         <th>Score</th>
@@ -40,6 +40,7 @@ class Score extends React.Component {
 
                 <table className="survivorTable">
                     <thead>
+                    <h2 id = "gamemode2"> Survivor </h2>
                     <tr>
                         <th>Name</th>
                         <th>Score</th>
@@ -58,6 +59,7 @@ class Score extends React.Component {
                 </table>
                 <table className="insaneTable">
                     <thead>
+                    <h2 id = "gamemode3"> Insane </h2>
                     <tr>
                         <th>Name</th>
                         <th>Score</th>
@@ -72,6 +74,7 @@ class Score extends React.Component {
                     }
                     </tbody>
                 </table>
+                <footer> © L.E.S.A.H, Inc </footer>
             </div>
 
         )

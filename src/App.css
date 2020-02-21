@@ -83,12 +83,12 @@ button.bRestart{
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
 }
 
-tbody{
-  overflow: scroll;
-  margin: 20px;
-  padding: 20px;
-  font-family: "Tahoma", Arial, sans-serif;
-  overflow-scrolling: auto;
+th {
+    overflow-scrolling: auto;
+    margin: 20px;
+    padding: 20px;
+    font-family: "Tahoma", Arial, sans-serif;
+    overflow-scrolling: auto;
 }
 p{
   color: white;
@@ -307,13 +307,13 @@ h1 span {
   transition-duration: 1s;
   color: rgb(111, 0, 136);
 
-  text-align: center;
-  font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+    text-align: center;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-th{
-  color: white;
-  font-size: 50px;
+th {
+    color: white;
+  font-size: medium;
 }
 tbody{
   transition-duration: 0.7s;
@@ -564,13 +564,32 @@ a:link{
   }
 }
 
+#gamemode1{
+    color: white;
+    text-align: center;
+    background-color: indianred;
+}
+#gamemode2{
+    color: white;
+    text-align: center;
+    background-color: cornflowerblue;
+}
+#gamemode3{
+    color: white;
+    text-align: center;
+    background-color: darkolivegreen;
+}
+
 .scoreTables {
   display: flex;
   height: 45em;
-  overflow: scroll;
   justify-content: space-around;
 }
 
+.scoreTables footer {
+    width: 100%;
+    text-align: left;
+}
 .scoreTables thead{
   background-color: rgba(0, 0, 0, 0.46);
   font-size: small;
