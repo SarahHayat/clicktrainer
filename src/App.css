@@ -587,6 +587,22 @@ a:link {
     }
 }
 
+#gamemode1{
+    color: white;
+    text-align: center;
+    background-color: indianred;
+}
+#gamemode2{
+    color: white;
+    text-align: center;
+    background-color: cornflowerblue;
+}
+#gamemode3{
+    color: white;
+    text-align: center;
+    background-color: darkolivegreen;
+}
+
 .scoreTables {
   display: flex;
   height: 45em;
@@ -594,6 +610,10 @@ a:link {
   justify-content: space-around;
 }
 
+.scoreTables footer {
+    width: 100%;
+    text-align: left;
+}
 .scoreTables thead{
   background-color: rgba(0, 0, 0, 0.46);
   font-size: small;
