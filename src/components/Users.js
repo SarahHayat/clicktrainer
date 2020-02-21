@@ -29,7 +29,7 @@ class Users extends React.Component{
             <form onSubmit={ event => this.setUser(event) }>
                 <footer> © L.E.S.A.H, Inc </footer>
                 <label>
-                    Prénom:
+                    Prénom :
                     <input type="text"  name="Prénom"/>
                 </label>
                 <input type="submit" value="Envoyer" />

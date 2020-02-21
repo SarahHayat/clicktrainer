@@ -19,9 +19,9 @@ class Score extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="scoreTables">
                 <footer> © L.E.S.A.H, Inc </footer>
-                <table>
+                <table className="normalTable" >
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -38,7 +38,7 @@ class Score extends React.Component {
                     </tbody>
                 </table>
 
-                <table>
+                <table className="survivorTable">
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -56,7 +56,7 @@ class Score extends React.Component {
                     }
                     </tbody>
                 </table>
-                <table>
+                <table className="insaneTable">
                     <thead>
                     <tr>
                         <th>Name</th>
