@@ -12,6 +12,8 @@ const store = createStore(reducer);
 firebase.initializeApp(firebaseConfig);
 
 function App() {
+
+
   return (
     <Provider store={store}>
       <Routing/>

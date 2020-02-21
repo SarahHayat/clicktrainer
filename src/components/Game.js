@@ -1,8 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, addScore, setChrono, getFinish, addSurvivorScore} from "../store/action";
-import {GAME_MODE_NORMAL, GAME_MODE_SURVIVOR} from "../gameMode";
-import {getStoreScore, PATH_NORMAL, PATH_SURVIVAL, setStoreScore} from "../firebase/dataShare";
+import {addClick, addScore, setChrono, getFinish, addSurvivorScore, addInsaneScore} from "../store/action";
+import {GAME_MODE_INSANE, GAME_MODE_NORMAL, GAME_MODE_SURVIVOR} from "../gameMode";
+import {getStoreScore, PATH_INSANE, PATH_NORMAL, PATH_SURVIVAL, setStoreScore} from "../firebase/dataShare";
+import {withRouter} from "react-router-dom";
 
 class Game extends React.Component {
 
@@ -18,12 +19,13 @@ class Game extends React.Component {
             millisecondsSurvivor: 0,
             finish: false,
             user: this.props.user,
-            start: true
+            start: true,
         };
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
         getStoreScore(PATH_NORMAL).map(el => {this.props.addScore(el)});
         getStoreScore(PATH_SURVIVAL).map(el => {this.props.addSurvivorScore(el)});
+        getStoreScore(PATH_INSANE).map(el => {this.props.addInsaneScore(el)});
         this.props.addClick(0);
     }
 
@@ -51,7 +53,7 @@ class Game extends React.Component {
         this.setState({...this.state, minutes: 1, seconds: 0});
         this.chrono = setInterval(() => {
                 const {milliseconds, seconds, minutes} = this.state;
-                if (this.props.chrono !== undefined) {
+                if (this.props.chrono !== undefined && this.props.gameMode === GAME_MODE_SURVIVOR) {
                     this.setState(({milliseconds}) => ({milliseconds: milliseconds + this.props.chrono}));
                     this.props.setChrono(0)
                 }
@@ -98,8 +100,7 @@ class Game extends React.Component {
                     this._saveScore();
                 }
             }
-            ,
-            10
+            , 10
         )
     };
 
@@ -137,8 +138,7 @@ class Game extends React.Component {
                 score: this.props.click
             }
             this.props.addScore(score);
-            setStoreScore([score], PATH_NORMAL);
-            console.log("yo")
+            setStoreScore(this.props.score, PATH_NORMAL);
         } else if (this.props.gameMode === GAME_MODE_SURVIVOR) {
             let score = {
                 user: this.state.user,
@@ -149,7 +149,13 @@ class Game extends React.Component {
             };
             this.props.addSurvivorScore(score);
             setStoreScore(this.props.survivorScore, PATH_SURVIVAL);
-            console.log("plait")
+        } else if (this.props.gameMode === GAME_MODE_INSANE) {
+            let score = {
+                user: this.state.user,
+                score: this.props.click
+            }
+            this.props.addInsaneScore(score);
+            setStoreScore(this.props.insaneScore, PATH_INSANE);
         }
     };
 
@@ -184,7 +190,8 @@ const mapStateToProps = (state) => {
         chrono: state.chrono,
         gameMode: state.gameMode,
         survivorScore: state.survivorScore,
-        score: state.score
+        score: state.score,
+        insaneScore: state.insaneScore
     }
 };
 
@@ -199,7 +206,9 @@ const mapDispatchToProps = dispatch => {
         addSurvivorScore: survivorScore => {
             dispatch(addSurvivorScore(survivorScore))
         },
-
+        addInsaneScore: insaneScore => {
+            dispatch(addInsaneScore(insaneScore))
+        },
         addClick: click => {
             dispatch(addClick(click))
         },
@@ -209,5 +218,5 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Game))
 

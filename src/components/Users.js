@@ -1,6 +1,7 @@
 import React from "react";
 import {setUser} from "../store/action";
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 class Users extends React.Component{
     constructor(props) {
@@ -37,7 +38,7 @@ const mapDispatchToProps = dispatch => {
         }
     }
 };
-export default connect(
+export default withRouter(connect(
     mapSateToProps,
     mapDispatchToProps
-)(Users)
+)(Users))

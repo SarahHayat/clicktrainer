@@ -1,8 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, getClick, getGameMode, setChrono} from "../store/action";
-import Chrono from "./Game";
+import {addClick, getClick, setGameMode, setChrono} from "../store/action";
 import {GAME_MODE_SURVIVOR} from "../gameMode";
+import Game from "./Game";
+import {withRouter} from "react-router-dom";
 
 class Survivor extends React.Component {
 
@@ -16,13 +17,14 @@ class Survivor extends React.Component {
             click: 0,
             isClick: false
         };
-        this.props.getGameMode(GAME_MODE_SURVIVOR)
+        this.props.setGameMode(GAME_MODE_SURVIVOR)
 
     }
 
     _click = () => {
         let maxX = this._area.current.clientWidth * 0.9;
         let maxY = this._area.current.clientHeight * 0.85;
+        this.state.click = this.props.click;
         this.state.click++;
         this.props.addClick(this.state.click)
         this.setState({
@@ -56,10 +58,15 @@ class Survivor extends React.Component {
         }
     };
 
+    submitHandler(e) {
+        e.preventDefault();
+    }
+
+
     render() {
         return (
             <div>
-                <Chrono/>
+                <Game/>
                 <div className="area" ref={this._area}>
                     <p> Score {this.props.click}</p>
                     <ul className="circles">
@@ -75,7 +82,11 @@ class Survivor extends React.Component {
                         <li/>
                     </ul>
                 </div>
-                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click}/>
+                <button style={Object.assign(this._buttonStyle(), this._screenSize)}
+                        onClick={this._click}
+                        onKeyPress={this.submitHandler}
+                        disabled={this.props.finish}
+                        id="cible"/>
             </div>
         );
     }
@@ -84,7 +95,8 @@ class Survivor extends React.Component {
 const mapStateToProps = (state) => {
     return {
         click : state.click,
-        chrono: state.chrono
+        chrono: state.chrono,
+        finish: state.finish
     }
 };
 
@@ -99,11 +111,11 @@ const mapDispatchToProps = dispatch => {
         setChrono: chrono => {
             dispatch(setChrono(chrono))
         },
-        getGameMode: gameMode => {
-            dispatch(getGameMode(gameMode))
+        setGameMode: gameMode => {
+            dispatch(setGameMode(gameMode))
         }
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Survivor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Survivor));
 

@@ -1,8 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addClick, getGameMode} from "../store/action";
+import {addClick, setGameMode} from "../store/action";
 import {GAME_MODE_NORMAL} from "../gameMode";
 import Game from "./Game";
+import {withRouter} from "react-router-dom";
 
 class Normal extends React.Component {
 
@@ -18,7 +19,7 @@ class Normal extends React.Component {
             click: 0,
             fakeClick: false
         };
-        this.props.getGameMode(GAME_MODE_NORMAL)
+        this.props.setGameMode(GAME_MODE_NORMAL)
     }
 
     _click = () => {
@@ -127,8 +128,16 @@ class Normal extends React.Component {
                         <li/>
                     </ul>
                 </div>
-                <button style={Object.assign(this._buttonStyle(), this._screenSize)} onClick={this._click} onKeyPress={this.submitHandler} disabled={this.props.finish} id="cible"/>
-                {this.state.fakeClick ? <button id="fakeButton" style={Object.assign(this._fakeButtonStyle(), this._screenSize)} onClick={this._onFakeClick} onKeyPress={this.submitHandler} disabled={this.props.finish}/> : null}
+                <button style={Object.assign(this._buttonStyle(), this._screenSize)}
+                        onClick={this._click}
+                        onKeyPress={this.submitHandler}
+                        disabled={this.props.finish}
+                        id="cible"/>
+                {this.state.fakeClick ? <button id="fakeButton"
+                                                style={Object.assign(this._fakeButtonStyle(), this._screenSize)}
+                                                onClick={this._onFakeClick}
+                                                onKeyPress={this.submitHandler}
+                                                disabled={this.props.finish}/> : null}
             </div>
         );
     }
@@ -146,11 +155,11 @@ const mapDispatchToProps = dispatch => {
         addClick: click => {
             dispatch(addClick(click))
         },
-        getGameMode: gameMode => {
-            dispatch(getGameMode(gameMode))
+        setGameMode: gameMode => {
+            dispatch(setGameMode(gameMode))
         }
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Normal);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Normal));
 

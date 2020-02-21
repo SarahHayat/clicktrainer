@@ -2,12 +2,14 @@ const initialState = {
     click: 0,
     score: [],
     survivorScore: [],
+    insaneScore: [],
     user: ""
 };
 
 function reducer(state = initialState, action){
 
     switch (action.type){
+
         case "ADD_CLICK":
             return {...state, click:  action.click};
 
@@ -27,9 +29,24 @@ function reducer(state = initialState, action){
             }
             return nextState;
 
+        case "ADD_INSANE_SCORE":
+            let nextStateInsaneScore = {...state, insaneScore: [...state.insaneScore, action.insaneScore]};
+            nextStateInsaneScore.insaneScore.sort((a, b) => {
+                if(a.score > b.score) {
+                    return -1;
+                }
+                if(a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
+            if (nextStateInsaneScore.score.length > 5) {
+                nextStateInsaneScore.score.pop()
+            }
+            return nextStateInsaneScore;
+
         case "ADD_SURVIVOR_SCORE":
             let nextStateSurvivorScore = {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
-            console.log(nextStateSurvivorScore);
             nextStateSurvivorScore.survivorScore.sort((a, b) => {
                 if(a.score > b.score) {
                     return -1;
@@ -44,7 +61,6 @@ function reducer(state = initialState, action){
             }
             return nextStateSurvivorScore;
 
-            return {...state, survivorScore: [...state.survivorScore, action.survivorScore]};
 
         case "SET_USER":
             return {...state, user:  action.user};
@@ -61,7 +77,7 @@ function reducer(state = initialState, action){
         case "GET_FINISH":
             return {...state, finish: action.finish};
 
-        case "GET_GAME_MODE":
+        case "SET_GAME_MODE":
             return {...state, gameMode: action.gameMode};
 
             default:
