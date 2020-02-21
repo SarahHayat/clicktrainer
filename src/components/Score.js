@@ -61,7 +61,6 @@ class Score extends React.Component {
                     <tr>
                         <th>Name</th>
                         <th>Score</th>
-                        <th>Time</th>
                     </tr>
                     </thead>
                     <tbody>
