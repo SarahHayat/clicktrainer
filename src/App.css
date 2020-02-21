@@ -58,10 +58,6 @@ footer{
   font-weight: bold;
 }
 
-
-
-
-
 /*mofif post-bug*/
 button.bRestart{
 
@@ -87,8 +83,8 @@ button.bRestart{
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
 }
 
-th{
-  overflow-scrolling: auto;
+tbody{
+  overflow: scroll;
   margin: 20px;
   padding: 20px;
   font-family: "Tahoma", Arial, sans-serif;

@@ -32,9 +32,7 @@ class Game extends React.Component {
         this.state.finish = true;
         this.props.getFinish(this.state.finish);
 
-        if(this.props.score.length === 0 &&
-            this.props.insaneScore.length === 0 &&
-            this.props.survivorScore.length === 0) {
+
             getStoreScore(PATH_NORMAL).map(el => {
                 this.props.addScore(el)
             });
@@ -44,7 +42,6 @@ class Game extends React.Component {
             getStoreScore(PATH_INSANE).map(el => {
                 this.props.addInsaneScore(el)
             });
-        }
         console.log(this.props.score)
         this.props.addClick(0);
     }
